@@ -1,0 +1,263 @@
+" TRAVIS MATTERA
+
+" Fish {{{
+if &shell =~# 'fish$'
+    set shell=sh
+endif
+" }}}
+
+" Neovim {{{
+if has('nvim')
+    let g:conf_dir="~/.config/nvim/"
+    let g:conf_file="init.vim"
+else
+    let g:conf_dir="~/.vim/"
+    let g:conf_file="vimrc"
+endif
+" }}}
+
+" Config {{{
+" Reloads vimrc after saving but keep cursor position
+if !exists('*ReloadVimrc')
+   fun! ReloadVimrc()
+       let save_cursor = getcurpos()
+       source $MYVIMRC
+       call setpos(‘.’, save_cursor)
+   endfun
+endif
+autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
+" }}}
+
+" Plugins {{{
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+exe "set rtp+=" . expand(g:conf_dir . "bundle/Vundle.vim")
+call vundle#begin(g:conf_dir . "plugins")
+
+" plugin list starts with vundle itself
+Plugin 'VundleVim/Vundle.vim'
+Plugin '907th/vim-auto-save'
+Plugin 'Konfekt/FastFold'
+Plugin 'Raimondi/delimitMate'
+Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'b4b4r07/vim-hcl'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'dkprice/vim-easygrep'
+Plugin 'ervandew/supertab'
+Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-hclfmt'
+Plugin 'godlygeek/tabular'
+Plugin 'google/vim-jsonnet'
+Plugin 'haggishunk/vim-colorschemes'
+Plugin 'hashivim/vim-terraform'
+Plugin 'honza/vim-snippets'
+Plugin 'itchyny/lightline.vim'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'kien/ctrlp.vim'
+Plugin 'nvie/vim-flake8'
+Plugin 'preservim/nerdtree'
+Plugin 'rodjek/vim-puppet'
+Plugin 'terryma/vim-expand-region'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'w0rp/ale'
+" Plugin 'juliosueiras/vim-terraform-completion'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" }}}
+
+" Folding {{{
+set foldenable
+set foldmethod=marker
+set foldlevelstart=0
+set foldnestmax=4
+au FileType sh let g:sh_fold_enabled=5
+au FileType sh let g:is_sh=1
+au FileType sh set foldmethod=syntax
+nnoremap <space> za
+let g:SimpylFold_docstring_preview=1
+" }}}
+
+" Basic {{{
+set noswapfile
+set hidden
+set history=100
+set dir=~/tmp
+" }}}
+
+" Colors {{{
+syntax enable
+colorscheme neonwave
+" }}}
+
+" UI {{{
+set showcmd
+set lazyredraw
+set laststatus=2
+set noshowmode
+set number
+set cursorline
+set wildmenu
+set showmatch
+set clipboard=unnamed
+" }}}
+
+" Tags {{{
+set tags^=./.git/tags
+" }}}
+
+" Completion {{{
+let g:SuperTabDefaultCompletionType='<C-n>'
+let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+let g:ycm_key_list_stop_completion=['<C-y>']
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" }}}
+
+" Snippets {{{
+let g:UltiSnipsSnippetsDir=expand(g:conf_dir . 'UltiSnips')
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+let g:UltiSnipsEditSplit="vertical"
+" }}}
+
+" Timings {{{
+set timeoutlen=1000 ttimeoutlen=0
+" }}}
+
+" Mappings _ Core {{{
+let mapleader=","
+exe "nnoremap <leader>s :source " . g:conf_dir . g:conf_file . "<CR>"
+nnoremap <leader><space> :nohlsearch<CR>
+" }}}
+
+" Navigation {{{
+let NERDTreeWinSize=35
+let NERDTreeIgnore=['\.pyc$', '^__pycache__$']
+let NERDTreeDirArrowExpandable=""
+let NERDTreeDirArrowCollapsible=""
+nnoremap <leader>nf :NERDTreeFind<CR>
+nnoremap <leader>nh :NERDTreeFocus<CR>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+" }}}
+
+" Lightline {{{
+let g:lightline={
+            \ 'colorscheme': 'darcula',
+            \ 'active': {
+            \   'left': [
+            \     ['mode', 'paste'], 
+            \     ['readonly', 'filename', 'modified', 'gitstatus']
+            \   ],
+            \   'right': [
+            \     ['lineinfo'], 
+            \     ['percent'], 
+            \     ['fileformat', 'fileencoding', 'filetype']]
+            \ },
+            \ 'component': {
+            \   'gitstatus': '%{FugitiveStatusline()}'
+            \ },
+            \ 'separator': { 'left': '', 'right': '' },
+            \ 'subseparator': { 'left': '|', 'right': '|' },
+            \ }
+" }}}
+
+" Syntastic {{{
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list=1
+" let g:syntastic_auto_loc_list=1
+" let g:syntastic_check_on_open=1
+" let g:syntastic_check_on_wq=0
+" }}}
+
+" Python {{{
+let python_highlight_all=1
+let g:ycm_python_interpreter_path=''
+let g:ycm_python_sys_path=[]
+let g:ycm_extra_conf_vim_data=[
+	\ 'g:ycm_python_interpreter_path',
+	\ 'g:ycm_python_sys_path'
+	\]
+let g:ycm_global_ycm_extra_conf='~/.config/python/global_extra_conf.py'
+" }}}
+
+" Filetypes {{{
+autocmd BufRead,BufNewFile *.libjsonnet set filetype=javascript
+" }}}
+
+" Search {{{
+set hlsearch
+set incsearch
+" }}}
+
+" Spaces & Tabs {{{
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set ambiwidth=single
+set wrap
+set expandtab
+set smarttab
+set smartindent
+set autoindent
+filetype plugin indent on
+" }}}
+
+" {{{ Linting
+let g:ale_fix_on_save = 1
+" }}}
+
+" Terraform {{{
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+let g:terraform_fold_sections=1
+let g:terraform_remap_spacebar=1
+let g:terraform_fmt_on_save=1
+let g:hcl_fmt_autosave=1
+autocmd FileType terraform setlocal commentstring=#%s
+" }}}
+
+" GPG {{{
+" don't save backups
+set backupskip+=*.gpg
+set viminfo=
+
+augroup encrypted
+	au!
+	" disable swap files and set binary format
+	autocmd BufReadPre,FileReadPre *.gpg
+	  \ setlocal noswapfile bin
+	" decrypt after reading, reset non-binary format,
+	" run BufReadPost autocmds
+	autocmd BufReadPost,FileReadPost *.gpg
+	  \ execute "'[,']!gpg --decrypt --default-recipient-self" |
+	  \ setlocal nobin |
+	  \ execute "doautocmd BufReadPost " . expand("%:r")
+	" set binary format and encrypt before writing
+	autocmd BufWritePre,FileWritePre *.gpg
+	  \ setlocal bin | 
+	  \ '[,']!gpg --encrypt --default-recipient-self
+    " undo encryption and set non-binary format after writing
+	autocmd BufWritePost,FileWritePost *.gpg
+	  \ silent u | 
+	  \ setlocal nobin
+augroup end
+" }}}
