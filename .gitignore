@@ -1,0 +1,8 @@
+*.swp
+*.log
+go.mod
+go.sum
+**/fish/fish_variables
+**/fish/functions/
+**/fish/completions/
+**/fish/conf.d/
