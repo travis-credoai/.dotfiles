@@ -46,6 +46,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'b4b4r07/vim-hcl'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'dkprice/vim-easygrep'
+Plugin 'tpope/vim-obsession'
 Plugin 'ervandew/supertab'
 Plugin 'fatih/vim-go'
 Plugin 'fatih/vim-hclfmt'
@@ -162,15 +163,16 @@ let g:lightline={
             \ 'colorscheme': 'darcula',
             \ 'active': {
             \   'left': [
-            \     ['mode', 'paste'], 
-            \     ['readonly', 'filename', 'modified', 'gitstatus']
+            \     ['mode', 'paste'],
+            \     ['readonly', 'filename', 'modified', 'obsession', 'gitstatus']
             \   ],
             \   'right': [
-            \     ['lineinfo'], 
-            \     ['percent'], 
+            \     ['lineinfo'],
+            \     ['percent'],
             \     ['fileformat', 'fileencoding', 'filetype']]
             \ },
             \ 'component': {
+            \   'obsession': '%{ObsessionStatus()}',
             \   'gitstatus': '%{FugitiveStatusline()}'
             \ },
             \ 'separator': { 'left': '', 'right': '' },
@@ -201,7 +203,7 @@ let g:ycm_global_ycm_extra_conf='~/.config/python/global_extra_conf.py'
 " }}}
 
 " Filetypes {{{
-autocmd BufRead,BufNewFile *.libjsonnet set filetype=javascript
+" write these under $VIMRUNTIME/ftdetect/
 " }}}
 
 " Search {{{
@@ -224,6 +226,13 @@ filetype plugin indent on
 
 " {{{ Linting
 let g:ale_fix_on_save = 1
+
+let g:ale_fixers = {
+            \ '*': [
+            \'remove_trailing_lines',
+            \'trim_whitespace',
+            \],
+            \}
 " }}}
 
 " Terraform {{{
@@ -254,11 +263,11 @@ augroup encrypted
 	  \ execute "doautocmd BufReadPost " . expand("%:r")
 	" set binary format and encrypt before writing
 	autocmd BufWritePre,FileWritePre *.gpg
-	  \ setlocal bin | 
+	  \ setlocal bin |
 	  \ '[,']!gpg --encrypt --default-recipient-self
     " undo encryption and set non-binary format after writing
 	autocmd BufWritePost,FileWritePost *.gpg
-	  \ silent u | 
+	  \ silent u |
 	  \ setlocal nobin
 augroup end
 " }}}
