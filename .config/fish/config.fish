@@ -24,6 +24,3 @@ end
 if test -f ~/.config/fish/local.fish
     source ~/.config/fish/local.fish
 end
-
-set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
-source ~/.virtualenvs/py3/bin/activate.fish
