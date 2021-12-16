@@ -12,7 +12,8 @@ set -gx SPACEFISH_GOLANG_SYMBOL 
 set -gx SPACEFISH_CHAR_SYMBOL 
 set -gx SPACEFISH_AWS_SYMBOL ' '
 
-eval (direnv hook fish)
+source (brew --prefix asdf)/libexec/asdf.fish
+direnv hook fish | source
 
 set -gx EDITOR vim
 
