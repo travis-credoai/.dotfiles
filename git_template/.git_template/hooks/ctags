@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+GIT_ROOT=$(git rev-parse --show-toplevel)
+trap 'rm -f "$GIT_ROOT/$$.tags"' EXIT
+git ls-files | \
+    ctags -f "$GIT_ROOT/$$.tags" -L -
+mv "$GIT_ROOT/$$.tags" "$GIT_ROOT/.tags"
