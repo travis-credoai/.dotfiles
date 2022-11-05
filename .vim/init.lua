@@ -1,5 +1,5 @@
 require('plugins')
-require('colorbuddy').colorscheme('neonwave')
+require('colorbuddy').colorscheme('the-vapors')
 
 require'nvim-treesitter.configs'.setup {
   highlight = {

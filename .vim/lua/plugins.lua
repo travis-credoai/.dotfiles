@@ -31,7 +31,7 @@ return require('packer').startup(function()
   use 'tpope/vim-fugitive'
   use 'tpope/vim-obsession'
   use 'tpope/vim-surround'
-  use '~/code/nvim/neonwave.nvim'
+  use 'haggishunk/the-vapors.nvim'
 
   -- circle back for matchup integration https://github.com/andymass/vim-matchup#tree-sitter-integration
   use {
