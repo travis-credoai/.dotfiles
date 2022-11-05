@@ -50,7 +50,7 @@ vim.o.laststatus = 2
 vim.o.noshowmode = true
 vim.o.timeoutlen = 2000
 vim.o.ttimeoutlen = 100
-vim.o.number = true
+vim.o.number = false
 vim.o.cursorline = true
 vim.o.wildmenu = true
 vim.o.showmatch = true
@@ -71,12 +71,7 @@ vim.o.shiftwidth = 2
 vim.o.ambiwidth='single'
 vim.o.expandtab = true
 vim.o.textwidth=0
--- allow for 
--- vim.o.winwidth=80
--- vim.o.winminwidth=1
-vim.wo.number = true
-vim.wo.relativenumber = true
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = 'number'
 vim.wo.wrap = false
 
 local key_mapper = function(mode, key, result)
