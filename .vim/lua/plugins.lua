@@ -21,6 +21,7 @@ return require('packer').startup(function()
   use 'bkegley/gloombuddy'
   use 'itchyny/lightline.vim'
   use 'jremmen/vim-ripgrep'
+  use 'kien/ctrlp.vim'
   -- check back once  https://github.com/preservim/nerdtree/issues/1321 is resolved
   -- use 'preservim/nerdtree'
   use 'santiagovrancovich/nerdtree'
