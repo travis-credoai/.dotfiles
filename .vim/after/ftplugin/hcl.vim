@@ -4,4 +4,4 @@ let b:ale_fixers = [
 \ 'trim_whitespace',
 \ { buffer -> { 'command': 'hclfmt' } }
 \]
-
+setlocal commentstring=#\ %s
