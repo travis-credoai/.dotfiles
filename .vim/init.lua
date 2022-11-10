@@ -107,3 +107,5 @@ vim.g.NERDTreeAutoCenter=1
 -- vim.g.NERDTreeIgnore="['\.pyc$', '^__pycache__$']"
 vim.g.NERDTreeDirArrowExpandable=''
 vim.g.NERDTreeDirArrowCollapsible=''
+vim.g.ctrlp_cmd = 'CtrlPBuffer'
+key_mapper('n', '<c-f>', ':CtrlP')
