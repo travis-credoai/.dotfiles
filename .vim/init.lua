@@ -108,4 +108,4 @@ vim.g.NERDTreeAutoCenter=1
 vim.g.NERDTreeDirArrowExpandable=''
 vim.g.NERDTreeDirArrowCollapsible=''
 vim.g.ctrlp_cmd = 'CtrlPBuffer'
-key_mapper('n', '<c-f>', ':CtrlP')
+key_mapper('n', '<c-f>', ':CtrlP<CR>')
