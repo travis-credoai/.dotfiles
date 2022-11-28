@@ -1,0 +1,55 @@
+# palette = "vapors"
+
+[character]
+# success_symbol = "[❯](fg:mustard bg:green)"
+success_symbol = "[❯](bold green)"
+
+[gcloud]
+symbol = " "
+
+[kubernetes]
+disabled = false
+
+[memory_usage]
+disabled = false
+
+[package]
+disabled = true
+
+[python]
+symbol = " "
+
+[terraform]
+symbol = ""
+
+# Define custom colors
+[palettes.vapors]
+electro_green = "#00d72d"
+guppie_green = "#00f77b" 
+ice_cyan = "#80ffff"
+vivid_sky = "#00d7ff"
+ice_cyan_dark = "#18afb0"
+sky_blue = "#87afff"
+vapor_blue = "#5f87ff"
+bolt_blue = "#00afff"
+azure = "#0087ff"
+deep_turquoise = "#0087af"
+cola_blue = "#0087d7"
+bubble_pink = "#d75fff"
+shock_pink = "#ff5fff"
+hot_pink = "#e100ff"
+dark_pink = "#ff00d7"
+vapor_purple = "#8787ff"
+deep_purple = "#5f5faf"
+hulk_pants = "#9145ed"
+bone_white = "#e4e4e4"
+light_gray = "#808080"
+charcoal = "#303030"
+dark_gray = "#262626"
+eerie_black = "#1c1c1c"
+vampire_black = "#080808"
+# Overwrite existing color
+blue = "vapor_blue"
+green = "#00d72d"  # electro_green
+red = "#d75fff" # bubble_pink 
+white = "#e4e4e4" # bone_white 
