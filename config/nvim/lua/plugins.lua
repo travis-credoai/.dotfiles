@@ -3,6 +3,7 @@
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
+-- autoload plugins file upon changes
 vim.cmd([[
   augroup packer_user_config
     autocmd!
