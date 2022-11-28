@@ -1,0 +1,101 @@
+[begin] (FluxBox)
+    [exec] (Slack) {slack}
+    [exec] (Zoom) {zoom}
+    [separator]
+    [submenu] (Development)
+        [exec] (Python) {urxvt -e python}
+        [exec] (IPython) {urxvt -e ipython}
+    [end]
+    [submenu] (Comms)
+        [exec] (Evolution) {evolution}
+        [exec] (Slack) {slack}
+        [exec] (Slack-tui) {urxvt -e slack-tui}
+        [exec] (Zoom) {zoom}
+    [end]
+    [submenu] (Editors)
+        [exec] (Atom) {atom}
+        [exec] (Nano) {urxvt -e nano}
+        [exec] (Vim) {urxvt -e vim}
+    [end]
+    [submenu] (Productivity)
+    	[exec] (libreoffice) {libreoffice}
+	    [exec] (evince) {evince}
+        [exec] (cherrytree) {cherrytree}
+        [exec] (apvlv) {apvlv}
+    [end]
+    [submenu] (Virtualization)
+        [exec] (VirtualBox) {VirtualBox}
+    [end]
+    [submenu] (IoT)
+        [exec] (arduino IDE) {arduino}
+    [end]
+    [submenu] (Games)
+	    [exec] (FreedroidRPG) {freedroidRPG}
+        [exec] (Freedroid) {freedroid}
+    [end]
+    [submenu] (Graphics-Video)
+        [exec] (Screenshooter) {xfce4-screenshooter}
+        [exec] (GIMP) {gimp}
+        [exec] (MATE Color Selection) {mate-color-select}
+        [exec] (Cheese) {cheese}
+    [end]
+    [submenu] (Monitor)
+	    [exec] (Conky) {conky -c ~/.conky/conky3.conf}
+        [exec] (etherape) {etherape}
+    [end]
+    [submenu] (Network)
+        [exec] (Avahi SSH Server Browser) {bssh}
+        [exec] (Avahi VNC Server Browser) {bvnc}
+        [exec] (Chromium) {chromium}
+        [exec] (Chrome) {google-chrome-stable}
+        [exec] (ELinks) {urxvt -e elinks}
+        [exec] (FTP) {urxvt -e ftp}
+        [exec] (Mail) {urxvt -e mail}
+        [exec] (Talk) {urxvt -e talk}
+        [exec] (Telnet) {urxvt -e telnet}
+        [exec] (TkVNC) {urxvt -e tkvnc}
+    [end]
+    [submenu] (News)
+	    [exec] (tickr) {tickr}
+    [end]
+    [submenu] (Shells)
+        [exec] (urxvt) {urxvt}
+        [exec] (urxvt [big]) {urxvt -fn "xft:Droid Sans Mono:size=16"}
+        [exec] (urxvt [client]) {urxvtc}
+        [exec] (urxvt [tabbed]) {urxvt-tabbed}
+    [end]
+    [submenu] (System)
+        [submenu] (Settings)
+            [exec] (File Management) {caja-file-management-properties}
+        [end]
+        [exec] (Avahi Zeroconf Browser) {avahi-discover}
+        [exec] (Caja) {caja --no-desktop}
+        [exec] (pstree) {urxvt -e pstree.x11}
+        [exec] (Top) {urxvt -e top}
+        [exec] (hTop) {urxvt -e htop}
+    [end]
+    [submenu] (Utilities)
+        [exec] (bbpager) {bbpager}
+        [exec] (fontforge) {fontforge}
+        [exec] (keypassxc) {keepassxc}
+        [exec] (Info) {urxvt -e info}
+        [exec] (Xev) {urxvt -e xev}
+        [exec] (XFontSel) {xfontsel}
+        [exec] (Xkill) {xkill}
+        [exec] (Xrefresh) {xrefresh}
+        [exec] (Xsetroot) {xsetroot}
+    [end]
+    [separator]
+    [submenu] (FluxBox)
+        [workspaces] (Workspaces)
+        [submenu] (Styles)
+            [stylesdir] (/usr/share/fluxbox/styles)
+       	    [stylesdir] (~/.fluxbox/styles) 
+	[end]
+        [config] (Configure)
+        [reconfig] (Reconfig)
+        [restart] (Restart)
+        [separator]
+        [exit] (Exit)
+    [end]
+[end]

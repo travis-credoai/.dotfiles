@@ -1,0 +1,14 @@
+Newsfile: ~/.fluxbox/news
+Logfile: ~/.fluxbox/fbnews.log
+
+Browser: "chromium %s"
+Siteformat: "%s"
+
+Sleep: 120 
+
+[Sources]
+Cat: Computers
+https://www.archlinux.org/feeds/news/
+Cat: Misc 
+https://slashdot.org/
+

@@ -1,0 +1,37 @@
+[begin] (fbnews)
+ [submenu] (Computers) {}
+
+[submenu] (Arch Linux: Recent news updates) {}
+[exec] (Deprecation of ABS tool and rsync endpoint) {chromium "https://www.archlinux.org/news/deprecation-of-abs/"}
+[exec] (ca-certificates-utils 20170307-1 upgrade requires manual intervention) {chromium "https://www.archlinux.org/news/ca-certificates-utils-20170307-1-upgrade-requires-manual-intervention/"}
+[exec] (mesa  with libglvnd support is now in testing) {chromium "https://www.archlinux.org/news/mesa-with-libglvnd-support-is-now-in-testing/"}
+[exec] (Phasing out i686 support) {chromium "https://www.archlinux.org/news/phasing-out-i686-support/"}
+[exec] (xorg-server 1.19.1 is now in extra) {chromium "https://www.archlinux.org/news/xorg-server-1191-is-now-in-extra/"}
+[exec] (OpenVPN 2.4.0 update requires administrative interaction) {chromium "https://www.archlinux.org/news/openvpn-240-update-requires-administrative-interaction/"}
+[exec] (ttf-dejavu 2.37 will require forced upgrade) {chromium "https://www.archlinux.org/news/ttf-dejavu-237-will-require-forced-upgrade/"}
+[exec] (TeXLive 2016 packages are now available) {chromium "https://www.archlinux.org/news/texlive-2016-packages-are-now-available/"}
+[exec] (test-sec-flags: Call for Assistance) {chromium "https://www.archlinux.org/news/test-sec-flags-call-for-assistance/"}
+[exec] (screen-4.4.0-1 unable to attach old sessions) {chromium "https://www.archlinux.org/news/screen-440-1-unable-to-attach-old-sessions/"}
+[end]
+
+[end]
+[submenu] (Misc) {}
+
+[submenu] (Arch Linux: Recent news updates) {}
+[exec] (Deprecation of ABS tool and rsync endpoint) {chromium "https://www.archlinux.org/news/deprecation-of-abs/"}
+[exec] (ca-certificates-utils 20170307-1 upgrade requires manual intervention) {chromium "https://www.archlinux.org/news/ca-certificates-utils-20170307-1-upgrade-requires-manual-intervention/"}
+[exec] (mesa  with libglvnd support is now in testing) {chromium "https://www.archlinux.org/news/mesa-with-libglvnd-support-is-now-in-testing/"}
+[exec] (Phasing out i686 support) {chromium "https://www.archlinux.org/news/phasing-out-i686-support/"}
+[exec] (xorg-server 1.19.1 is now in extra) {chromium "https://www.archlinux.org/news/xorg-server-1191-is-now-in-extra/"}
+[exec] (OpenVPN 2.4.0 update requires administrative interaction) {chromium "https://www.archlinux.org/news/openvpn-240-update-requires-administrative-interaction/"}
+[exec] (ttf-dejavu 2.37 will require forced upgrade) {chromium "https://www.archlinux.org/news/ttf-dejavu-237-will-require-forced-upgrade/"}
+[exec] (TeXLive 2016 packages are now available) {chromium "https://www.archlinux.org/news/texlive-2016-packages-are-now-available/"}
+[exec] (test-sec-flags: Call for Assistance) {chromium "https://www.archlinux.org/news/test-sec-flags-call-for-assistance/"}
+[exec] (screen-4.4.0-1 unable to attach old sessions) {chromium "https://www.archlinux.org/news/screen-440-1-unable-to-attach-old-sessions/"}
+[end]
+
+[end]
+[submenu] (Misc) {}
+
+[end]
+[end]

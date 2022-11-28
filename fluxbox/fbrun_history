@@ -1,0 +1,54 @@
+cherrytree
+evolution
+rclone mount gdrive:/ /home/n10/gdrive/
+shutdown -P 0
+slack-tui
+urxvt -i slack-tui
+conky -c ~/challenges/conk2.conf
+conky -c ~/challenges/conky2.conf
+conky -c ~/challenges/conk3.conf
+conky -c ~/challenges/conky3.conf
+rclone mount gdrive:/ ~/gdrive/ &
+pkill xscreensaver
+xscreensaver &
+conky -c ~/.conky/conky4.conf
+conky -c ~/.conky/conky2.conf
+conky -c conky4.conf
+conky -c ~/conky4.conf
+rclone mount gdrive:/ ~/gdrive/
+pkill conky
+arduino
+urxvt -fade 50
+urxvt -fade 100
+urxvt -fn "xft:droid sans mono:size=16"
+masterpdfeditor4
+caj
+mupdf
+sudo fontforte
+fontforge
+conky -c ~/.conky/conky3.conf
+inkscape
+chrome
+sudo arduino
+vkc
+google-chrome
+google-chrome-stable
+virtualbox
+chromium
+libreoffice
+caja
+don
+ kjd
+sd
+shutdown -r now
+gimp
+urxvt
+evince
+xterm
+keepassxc
+kjkj
+firefox
+VirtualBox
+vlc
+zoom
+sudo fontforge
