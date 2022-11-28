@@ -6,3 +6,5 @@ go.sum
 **/fish/functions/
 **/fish/completions/
 **/fish/conf.d/
+.tags
+tags
