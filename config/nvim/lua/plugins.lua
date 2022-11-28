@@ -16,6 +16,7 @@ return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
+  use 'towolf/vim-helm'
 
   use 'Konfekt/FastFold'
   use 'andymass/vim-matchup'
