@@ -1,16 +1,21 @@
 #!/usr/bin/env bash
 #
-STOW_ACTION="-S"
-if test "$1" = "delete"; then
-    STOW_ACTION="-D"
-fi
+case $1 in
+    delete) STOW_ACTION="-D" ;;
+    restow) STOW_ACTION="-R" ;;
+    *) STOW_ACTION="-S" ;;
+esac
 
 for DOT in tmux git_template editorconfig X11; do
     stow "$STOW_ACTION" -t ~ "$DOT"
 done
 
 for CFG_DOT in nvim fish starship yamllint sway; do
-    stow "$STOW_ACTION" -t ~/.config/$CFG_DOT/ -d config "$CFG_DOT"
+    if test -d ~/.config/$CFG_DOT; then
+        stow "$STOW_ACTION" -t ~/.config/$CFG_DOT/ -d config "$CFG_DOT"
+    else
+        echo "Skipping $CFG_DOT... directory ~/.config/$CFG_DOT does not exist"
+    fi
 done
 
 stow "$STOW_ACTION" -t ~/.config/fish/functions -d config fish-functions
