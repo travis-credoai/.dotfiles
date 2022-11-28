@@ -19,7 +19,12 @@ return require('packer').startup(function()
   use 'Konfekt/FastFold'
   use 'andymass/vim-matchup'
   use 'bkegley/gloombuddy'
-  use 'itchyny/lightline.vim'
+  -- use 'itchyny/lightline.vim'
+  use ({
+      'glepnir/galaxyline.nvim',
+      branch = 'main',
+      config = function() require('eviline') end,
+  })
   use 'jremmen/vim-ripgrep'
   use 'kien/ctrlp.vim'
   -- check back once  https://github.com/preservim/nerdtree/issues/1321 is resolved
