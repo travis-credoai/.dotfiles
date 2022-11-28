@@ -5,11 +5,11 @@ if test "$1" = "delete"; then
     STOW_ACTION="-D"
 fi
 
-for DOT in tmux git_template editorconfig; do
+for DOT in tmux git_template editorconfig X11; do
     stow "$STOW_ACTION" -t ~ "$DOT"
 done
 
-for CFG_DOT in nvim fish starship yamllint; do
+for CFG_DOT in nvim fish starship yamllint sway; do
     stow "$STOW_ACTION" -t ~/.config/$CFG_DOT/ -d config "$CFG_DOT"
 done
 

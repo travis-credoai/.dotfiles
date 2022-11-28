@@ -1,0 +1,68 @@
+URxvt.font:            xft:DroidSansMono Nerd Font Mono:pixelsize=16:minspace=False, xft:DejaVu Sans:pixelsize=11
+/* URxvt.font:            xft:Hack Nerd Font Mono:pixelsize=14:minspace=False, xft:DejaVu Sans:pixelsize=11 */
+/* URxvt.font:            xft:mononoki Nerd Font Mono:pixelsize=14:minspace=False, xft:DejaVu Sans:pixelsize=11 */
+/* URxvt.font:            xft:SpaceMono Nerd Font Mono:pixelsize=14:minspace=False, xft:DejaVu Sans:pixelsize=11 */
+URxvt.letterSpace:     0
+URxvt.fading:          50
+URxvt.scrollBar:       false
+URxvt.iso14755:        false
+URxvt.saveLines:       9999
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+URxvt.cutchars:        "()*,<>[]{}|"
+
+
+Xft.autohint:          1
+Xft.lcdfilter:         lcddefault
+Xft.hintstyle:         hintslight
+Xft.hinting:           1
+Xft.antialias:         1
+Xft.rgba:              rgb
+
+/* colorscheme thirteen */
+/* https://web.archive.org/web/20090130061234/http://phraktured.net/terminal-colors/ */
+/* *background:           #000000 */
+/* *foreground:           #00af00 */
+/* *color1:               #9e1828 */
+/* *color2:               #aece92 */
+/* *color3:               #968a38 */
+/* *color4:               #414171 */
+/* *color5:               #963c59 */
+/* *color6:               #7f9f7f */
+/* *color7:               #bebebe */
+/* *color8:               #666666 */
+/* *color9:               #cf6171 */
+/* *color10:              #afc5af */
+/* *color11:              #f0dfaf */
+/* *color12:              #8e9fbc */
+/* *color13:              #dca3a3 */
+/* *color14:              #95c1c5 */
+/* *color15:              #ffffff */
+
+/* colorscheme neonwave */
+*background:               #080808
+*foreground:               #00af00
+! black
+*color0:                   #080808
+*color8:                   #080808
+! magenta
+*color1:                   #8700ff
+*color9:                   #8700ff
+! cyan
+*color2:                   #5f87ff
+*color10:                  #5fafff
+! yellow  (orange)
+*color3:                   #d75f00
+*color11:                  #ff8700
+! green
+*color4:                   #00af00
+*color12:                  #00d700
+! red  (needs work)
+*color5:                   #af00af
+*color13:                  #ff00af
+! blue
+*color6:                   #005fd7
+*color14:                  #0087ff
+! white
+*color7:                   #dadada
+*color15:                  #bcbcbc
