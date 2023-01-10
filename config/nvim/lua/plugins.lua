@@ -25,7 +25,7 @@ return require('packer').startup(function()
   use ({
       'glepnir/galaxyline.nvim',
       branch = 'main',
-      config = function() require('eviline') end,
+      config = function() require('spaceline') end,
   })
   use 'jremmen/vim-ripgrep'
   use 'kien/ctrlp.vim'
@@ -54,7 +54,9 @@ return require('packer').startup(function()
 
   use {
     'w0rp/ale',
-    ft = {'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'hcl', 'html', 'markdown', 'racket', 'vim', 'tex', 'yaml', 'yml', 'json', 'smarty', 'dockerfile'},
+    ft = {'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'hcl',
+          'html', 'markdown', 'racket', 'vim', 'tex', 'yaml',
+          'yml', 'json', 'smarty', 'dockerfile'},
     cmd = 'ALEEnable',
     config = 'vim.cmd[[ALEEnable]]'
   }
