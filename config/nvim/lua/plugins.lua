@@ -40,6 +40,14 @@ return require('packer').startup(function()
   use 'tpope/vim-obsession'
   use 'tpope/vim-surround'
   use 'haggishunk/the-vapors.nvim'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
+  use 'glench/vim-jinja2-syntax'
 
   -- circle back for matchup integration https://github.com/andymass/vim-matchup#tree-sitter-integration
   use {
