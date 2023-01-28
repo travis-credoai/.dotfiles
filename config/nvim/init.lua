@@ -2,7 +2,7 @@ require('plugins')
 require('colorbuddy').colorscheme('the-vapors')
 
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "c", "lua", "rust", "yaml", "vim", "python", "dockerfile", "go", "mermaid", "markdown", "hcl", "typescript", "toml" },
+  ensure_installed = { "c", "lua", "rust", "yaml", "vim", "python", "dockerfile", "go", "mermaid", "markdown", "terraform", "hcl", "typescript", "toml" },
   auto_install = false,
   highlight = {
     enable = true,
@@ -29,6 +29,9 @@ require'nvim-treesitter.configs'.setup {
     -- [options]
   },
 }
+
+local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
+ft_to_parser["terraform-vars"] = "terraformls"
 
 local cmp = require'cmp'
 
@@ -94,7 +97,8 @@ local cmp = require'cmp'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require'lspconfig'.terraformls.setup{
-  capabilities = capabilities
+  capabilities = capabilities,
+  filetypes = {"terraform", "terraform-vars"}
 }
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
   pattern = {"*.tf", "*.tfvars"},
