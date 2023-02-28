@@ -182,7 +182,9 @@ key_mapper('n', '<leader>w=', ':set wrap<CR>')
 vim.g.SimpylFold_docstring_preview=1
 vim.g.NERDTreeWinSize=35
 vim.g.NERDTreeAutoCenter=1
--- vim.g.NERDTreeIgnore="['\.pyc$', '^__pycache__$']"
+vim.cmd([[
+  let NERDTreeIgnore=['\~$', '\.pyc$', '__pycache__$', '.egg-info$']
+]])
 vim.g.NERDTreeDirArrowExpandable=''
 vim.g.NERDTreeDirArrowCollapsible=''
 vim.g.ctrlp_cmd = 'CtrlPBuffer'
