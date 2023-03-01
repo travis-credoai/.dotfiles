@@ -8,3 +8,5 @@ set fileformat=unix
 
 let b:ale_fixers = ['black', 'remove_trailing_lines', 'trim_whitespace']
 let b:ale_fix_on_save = 0
+
+set omnifunc=v:lua.vim.lsp.omnifunc()
