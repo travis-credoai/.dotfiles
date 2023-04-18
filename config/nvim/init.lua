@@ -102,7 +102,9 @@ require'lspconfig'.terraformls.setup{
 }
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
   pattern = {"*.tf", "*.tfvars"},
-  callback = vim.lsp.buf.formatting_sync,
+  callback = function() 
+    vim.lsp.buf.format({async=true})
+  end
 })
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
