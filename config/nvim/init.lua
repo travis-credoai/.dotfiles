@@ -1,6 +1,9 @@
 require('plugins')
 require('colorbuddy').colorscheme('the-vapors')
 
+-- treesitter
+-------------
+
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "c", "lua", "rust", "yaml", "vim", "python", "dockerfile", "go", "mermaid", "markdown", "terraform", "hcl", "typescript", "toml" },
   auto_install = false,
@@ -30,8 +33,12 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+-- hack to get tfvars read by treesitter as tf files
 local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
 ft_to_parser["terraform-vars"] = "terraformls"
+
+-- completion
+-------------
 
 local cmp = require'cmp'
 
@@ -94,9 +101,15 @@ local cmp = require'cmp'
     })
   })
 
+-- lsp
+------
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-require'lspconfig'.terraformls.setup{
+lspconfig = require('lspconfig')
+lsputil = require('lspconfig/util')
+
+-- terraform
+lspconfig.terraformls.setup{
   capabilities = capabilities,
   filetypes = {"terraform", "terraform-vars"}
 }
@@ -107,8 +120,9 @@ vim.api.nvim_create_autocmd({"BufWritePre"}, {
   end
 })
 
+-- python
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
-require'lspconfig'.pylsp.setup{
+lspconfig.pylsp.setup{
   capabilities = capabilities,
   settings = {
     pylsp = {
@@ -121,6 +135,26 @@ require'lspconfig'.pylsp.setup{
     }
   }
 }
+
+-- golang
+-- https://github.com/golang/tools/blob/master/gopls/doc/vim.md
+lspconfig.gopls.setup{
+  capabilities = capabilities,
+  cmd = {"gopls", "serve"},
+  filetypes = {"go", "gomod"},
+  root_dir = lsputil.root_pattern("go.work", "go.mod", ".git"),
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+    },
+  },
+}
+
+-- general
+----------
 
 vim.o.showcmd = true
 vim.o.lazyredraw = true
