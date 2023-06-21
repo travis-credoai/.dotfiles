@@ -18,6 +18,7 @@ return require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'towolf/vim-helm'
 
+  use 'google/vim-jsonnet'
   use 'Konfekt/FastFold'
   use 'andymass/vim-matchup'
   use 'bkegley/gloombuddy'

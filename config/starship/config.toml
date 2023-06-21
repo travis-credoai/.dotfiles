@@ -4,6 +4,9 @@
 # success_symbol = "[❯](fg:mustard bg:green)"
 success_symbol = "[❯](bold green)"
 
+[directory]
+truncation_symbol = "…/"
+
 [gcloud]
 symbol = " "
 
