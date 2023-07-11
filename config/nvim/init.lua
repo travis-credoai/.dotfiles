@@ -34,9 +34,6 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- hack to get tfvars read by treesitter as tf files
--- local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
--- ft_to_parser["terraform-vars"] = "terraformls"
-
 vim.treesitter.language.register("terraformls", "terraform-vars")
 
 -- completion
