@@ -20,3 +20,4 @@ done
 
 stow "$STOW_ACTION" -t ~/.config/fish/functions -d config fish-functions
 stow "$STOW_ACTION" -t ~/.config/fish/completions -d config fish-completions
+stow "$STOW_ACTION" -t ~/.ipython/profile_default -d ipython profile_default
