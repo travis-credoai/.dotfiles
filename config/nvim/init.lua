@@ -129,6 +129,10 @@ lspconfig.pylsp.setup{
         pycodestyle = {
           ignore = {'W391'},
           maxLineLength = 100
+        },
+        yapf = {
+          based_on_style = 'pep8',
+          spaces_before_comment = '4'
         }
       }
     }
