@@ -21,8 +21,8 @@ rules:
   hyphens:
     level: warning
   indentation:
-    level: warning
-    indent-sequences: consistent
+    level: error
+    indent-sequences: false
   line-length:
     level: warning
     allow-non-breakable-inline-mappings: true
