@@ -102,6 +102,11 @@ local cmp = require'cmp'
 
 -- lsp
 ------
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
+  end,
+})
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 lspconfig = require('lspconfig')
@@ -156,6 +161,13 @@ lspconfig.gopls.setup{
   },
 }
 
+vim.api.nvim_create_autocmd({"BufWritePre"}, {
+  pattern = {"*.go"},
+  callback = function() 
+    vim.lsp.buf.format({async=true})
+    vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+  end,
+})
 -- general
 ----------
 
