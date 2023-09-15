@@ -230,6 +230,10 @@ key_mapper('n', '<c-k>', '<c-w><c-k>')
 key_mapper('n', '<c-l>', '<c-w><c-l>')
 key_mapper('n', '<c-h>', '<c-w><c-h>')
 key_mapper('n', '<leader>w=', ':set wrap<CR>')
+key_mapper('n', '<leader>do', '<cmd>lua vim.diagnostic.open_float()<CR>')
+key_mapper('n', '<leader>d[', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+key_mapper('n', '<leader>d]', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+key_mapper('n', '<leader>dd', '<cmd>lua vim.diagnostic.setloclist()<CR>')
 vim.g.SimpylFold_docstring_preview=1
 vim.g.NERDTreeWinSize=35
 vim.g.NERDTreeAutoCenter=1
