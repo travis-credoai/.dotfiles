@@ -144,7 +144,21 @@ lspconfig.pylsp.setup{
   }
 }
 
+-- yaml
+lspconfig.yamlls.setup{
+  capabilities = capabilities,
+  settings = {
+    yaml = {
+      schemas = {
+        ["https://json.schemastore.org/kustomization.json"] = "/kustomization.yaml",
+        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+      }
+    }
+  }
+}
+
 -- golang
+require('go').setup()
 -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md
 lspconfig.gopls.setup{
   capabilities = capabilities,
