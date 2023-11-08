@@ -24,6 +24,10 @@ return require('packer').startup(function()
   })
   -- check back once  https://github.com/preservim/nerdtree/issues/1321 is resolved
   -- use 'preservim/nerdtree'
+  use ({
+    '0x00-ketsu/autosave.nvim',
+    config = function() require('autosave').setup{} end,
+  })
   use 'Konfekt/FastFold'
   use 'andymass/vim-matchup'
   use 'bkegley/gloombuddy'
