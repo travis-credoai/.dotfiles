@@ -15,11 +15,14 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 set $term foot
+set $uiFont Hack
+set $statusFont ShureTechMono Nerd Font Mono
+set $highlight #3daee9
+set $prompt #18b218
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu bemenu-run --fn "Hack 20"
+set $menu bemenu-run --fn "$statusFont 28" -p "▶" --tf "$prompt" --hf "$highlight" --sf "$highlight" --scf "$highlight" | xargs swaymsg exec
 # displays
 set $laptop LVDS-1
 set $monitor DP-1
@@ -97,6 +100,15 @@ input "type:keyboard" {
 #
 # Moving around:
 #
+
+# NEW OPTION IDEA:
+#
+# Takeover and Retreat
+#
+# A window can expand in a commanded direction incrementally pushing into 
+# windows/panels in its path.  The takeover panels squish and are saved
+# for restoration upon window retreat in the opposite direction. 
+
     # Move your focus around
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
@@ -232,7 +244,7 @@ bindsym $mod+slash exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
-    font "ShureTechMono Nerd Font Mono 20"
+    font "$statusFont 28"
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
@@ -278,7 +290,17 @@ bindsym $mod+Shift+e $nag -t "warning" -m "Exit Sway?" -b "Exit" "swaymsg exit" 
 #   # 'Reload Sway' option will be initially selected instead of the 'Exit Sway' option
 swaynag_command $nag -R
 
+#
+# Notifications
+#
 
-font pango:Hack 20
+bindsym $mod+n exec makoctl dismiss
+bindsym $mod+Shift+n exec makoctl dismiss --all
+
+#
+# Final
+#
+
+font pango:$uiFont 20
 
 include /etc/sway/config.d/*
