@@ -20,7 +20,7 @@ return require('packer').startup(function()
   use ({
       'glepnir/galaxyline.nvim',
       branch = 'main',
-      config = function() require('spaceline') end,
+      config = function() require('themes/spaceline') end,
   })
   -- check back once  https://github.com/preservim/nerdtree/issues/1321 is resolved
   -- use 'preservim/nerdtree'
