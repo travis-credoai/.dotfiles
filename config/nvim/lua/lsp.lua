@@ -87,3 +87,12 @@ vim.api.nvim_create_autocmd({"BufWritePre"}, {
     vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
   end,
 })
+
+-- elixir
+lspconfig.elixirls.setup{
+  capabilities = capabilities,
+  cmd = {"/opt/homebrew/opt/elixir-ls/bin/elixir-ls"},
+  settings = {
+  }
+}
+
