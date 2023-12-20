@@ -48,10 +48,19 @@ lspconfig.yamlls.setup{
       schemas = {
         ["https://json.schemastore.org/kustomization.json"] = "/kustomization.yaml",
         ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+        ["https://json.schemastore.org/chart.json"] = "/Chart.yaml",
       }
     }
   }
 }
+
+-- don't run yamlls on helm template yamls
+vim.api.nvim_create_autocmd({"BufRead"}, {
+  pattern = {"*/templates/**/*.yaml"},
+  callback = function() 
+    vim.diagnostic.disable(0)
+  end,
+})
 
 -- golang
 require('go').setup()
