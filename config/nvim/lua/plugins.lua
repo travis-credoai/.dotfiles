@@ -31,6 +31,7 @@ return require('packer').startup(function()
   use 'Konfekt/FastFold'
   use 'andymass/vim-matchup'
   use 'bkegley/gloombuddy'
+  use 'dag/vim-fish'
   use 'glench/vim-jinja2-syntax'
   use 'google/vim-jsonnet'
   use 'haggishunk/the-vapors.nvim'
@@ -74,4 +75,13 @@ return require('packer').startup(function()
     cmd = 'ALEEnable',
     config = 'vim.cmd[[ALEEnable]]'
   }
+
+  use {
+      'chipsenkbeil/distant.nvim',
+      branch = 'v0.3',
+      config = function()
+          require('distant'):setup()
+      end
+  }
+
 end)
