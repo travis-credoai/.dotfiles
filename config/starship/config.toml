@@ -185,7 +185,7 @@ only_detached = false
 tag_disabled = false
 
 [git_status]
-format = '([\[$all_status$ahead_behind\]]($style inverted)[]($style))'
+format = '([]($style inverted)[\[$all_status$ahead_behind\]]($style inverted)[]($style))'
 style = 'bold fg:bubble_pink bg:background'
 
 [docker_context]
@@ -194,6 +194,7 @@ symbol = ' '
 
 [kubernetes]
 disabled = false
+symbol = '☸'
 format = '[$symbol]($style inverted)[$context( \($namespace\))]($style)'
 style = 'bold fg:vapor_blue bg:background'
 contexts = [
@@ -202,6 +203,11 @@ contexts = [
 
 [memory_usage]
 disabled = false
+
+[nodejs]
+symbol = ''
+format = '[$symbol]($style inverted)[$version]($style)'
+style = 'bold fg:vapor_blue bg:background'
 
 [package]
 disabled = true
