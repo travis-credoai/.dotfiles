@@ -50,7 +50,7 @@
     $laptop LVDS-1
     $monitor DP-1
     # $wallpaper /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png
-    $wallpaper ~/bg/nimphradora-journey-to-inon.jpg
+    $wallpaper ~/bg/antonkurbatov-basegrad.png
     # nag
     $nag         swaynagmode
     $nag_exit    $nag --exit
@@ -82,7 +82,6 @@
   for_window [window_type="splash"] floating enable
   # wayland
   for_window [app_id="keepassxc"] floating enable
-  for_window [app_id="keepassxc"] floating_maximum_size 300 x 200
   for_window [title="."] title_format "%title"
 
 ### Output configuration
