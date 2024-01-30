@@ -31,6 +31,7 @@ return require('packer').startup(function()
   use 'Konfekt/FastFold'
   use 'andymass/vim-matchup'
   use 'bkegley/gloombuddy'
+  use 'cappyzawa/starlark.vim'
   use 'dag/vim-fish'
   use 'glench/vim-jinja2-syntax'
   use 'google/vim-jsonnet'

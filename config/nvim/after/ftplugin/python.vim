@@ -7,8 +7,12 @@ set autoindent
 set fileformat=unix
 
 let b:ale_fixers = ['black', 'remove_trailing_lines', 'trim_whitespace']
-let b:ale_fix_on_save = 0
+let b:ale_fix_on_save = 1
 
 set omnifunc=v:lua.vim.lsp.omnifunc()
 
-set b:ale_virtualenv_dir_names = ['~/.virtualenvs', '~/.virtualenvs/py3']
+let b:ale_python_auto_pipenv = 1
+let b:ale_python_auto_poetry = 1
+let b:ale_python_auto_virtualenv = 1
+let b:ale_python_flake8_auto_pipenv = 1
+let b:ale_python_flake8_auto_poetry = 1
