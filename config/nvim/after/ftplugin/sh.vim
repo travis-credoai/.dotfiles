@@ -12,6 +12,4 @@ let b:ale_linters = [
 \ 'shellcheck',
 \]
 
-let b:ale_sh_shellcheck_executable='/home/n10/.asdf/installs/shellcheck/0.9.0/bin/shellcheck'
 let b:ale_sh_shellcheck_change_directory=0
-let b:ale_sh_shfmt_executable='/home/n10/.asdf/installs/shfmt/3.7.0/bin/shfmt'

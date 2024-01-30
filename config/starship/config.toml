@@ -1,58 +1,238 @@
-# palette = "vapors"
+format = """
+$username\
+$hostname\
+$directory\
+$direnv\
+$localip\
+$shlvl\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$pijul_channel\
+$docker_context\
+$singularity\
+$kubernetes\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$typst\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$env_var\
+$crystal\
+$custom\
+$sudo\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$os\
+$container\
+$shell\
+$character"""
+
+palette = 'vapors'
+
+# Define custom colors
+[palettes.vapors]
+background = '#262626' # linked to terminal colors
+# electro_green = '#00d72d'  # old
+electro_green = '#12e03d'
+guppie_green = '#00f77b' 
+ice_cyan = '#80ffff'
+vivid_sky = '#00d7ff'
+ice_cyan_dark = '#18afb0'
+sky_blue = '#87afff'
+vapor_blue = '#5f87ff'
+bolt_blue = '#00afff'
+azure = '#0087ff'
+deep_turquoise = '#0087af'
+cola_blue = '#0087d7'
+bubble_pink = '#d75fff'
+shock_pink = '#ff5fff'
+hot_pink = '#e100ff'
+dark_pink = '#ff00d7'
+vapor_purple = '#8787ff'
+deep_purple = '#5f5faf'
+hulk_pants = '#9145ed'
+bone_white = '#e4e4e4'
+light_gray = '#808080'
+charcoal = '#303030'
+dark_gray = '#262626'
+eerie_black = '#1c1c1c'
+vampire_black = '#080808'
+white = '#e4e4e4' # bone_white 
+
+red = '#f7768e'
+orange = '#ff9e64'
+yellow = '#e0af68'
+green = '#9ece6a'
+purple = '#9d7cd8'
+cyan = '#7dcfff'
+pink = '#bb9af7'
+
+
+
+[aws]
+disabled = false
+symbol = '󰸏'
+format = '[$symbol]($style inverted)[($profile)(\($region\))(\[$duration\])]($style)'
+style = 'bold fg:vapor_blue bg:background'
+region_aliases = { us-west-2 = "usw2" }
+
+[battery]
+full_symbol = ''
+charging_symbol = ''
+discharging_symbol = ''
+empty_symbol = ''
+format = '[$symbol$percentage]($style) '
 
 [character]
-# success_symbol = "[❯](fg:mustard bg:green)"
-success_symbol = "[❯](bold green)"
+success_symbol = '[❯](bold fg:hulk_pants)'
+error_symbol = '[❯](bold fg:bubble_pink)'
 
 [directory]
-truncation_symbol = "…/"
+truncation_symbol = '…/'
+format = '[ $symbol]($style inverted)[$path]($style)'
+style = 'bold fg:vapor_blue bg:background'
+
+[direnv]
+disabled = false
+symbol = ''
+loaded_msg = ''
+unloaded_msg = ''
+allowed_msg = ''
+denied_msg = '󱎘'
+format = '[$symbol]($style inverted)[$allowed|$loaded]($style)'
+style = 'bold fg:vapor_blue bg:background'
+
+[elixir]
+disabled = false
+symbol = '󰖌 '
 
 [gcloud]
-symbol = " "
+symbol = ' '
+
+[git_branch]
+disabled = false
+symbol = '󰳏'
+format = '[$symbol]($style inverted)[$branch(:$remote_branch)]($style)'
+style = 'bold fg:vapor_blue bg:background'
+truncation_length = 32
+only_attached = true
+
+[git_commit]
+disabled = false
+format = '[$symbol\($hash$tag\)]($style inverted)[]($style)'
+style = 'bold fg:vapor_blue bg:background'
+only_detached = false
+tag_disabled = false
+
+[git_status]
+format = '([]($style inverted)[\[$all_status$ahead_behind\]]($style inverted)[]($style))'
+style = 'bold fg:bubble_pink bg:background'
+
+[docker_context]
+disabled = true
+symbol = ' '
 
 [kubernetes]
 disabled = false
+symbol = '☸'
+format = '[$symbol]($style inverted)[$context( \($namespace\))]($style)'
+style = 'bold fg:vapor_blue bg:background'
+contexts = [
+    { context_pattern = '.*prd.*', style = 'fg:red' },
+]
 
 [memory_usage]
 disabled = false
+
+[nodejs]
+symbol = ''
+format = '[$symbol]($style inverted)[$version]($style)'
+style = 'bold fg:vapor_blue bg:background'
 
 [package]
 disabled = true
 
 [python]
-symbol = " "
+symbol = ''
+style = 'bold fg:vapor_blue bg:background'
+
+[rust]
+symbol = ''
+style = 'bold fg:vapor_blue bg:background'
 
 [terraform]
-symbol = ""
+symbol = '󱁢'
+style = 'bold fg:vapor_blue bg:background'
 
-# Define custom colors
-[palettes.vapors]
-electro_green = "#00d72d"
-guppie_green = "#00f77b" 
-ice_cyan = "#80ffff"
-vivid_sky = "#00d7ff"
-ice_cyan_dark = "#18afb0"
-sky_blue = "#87afff"
-vapor_blue = "#5f87ff"
-bolt_blue = "#00afff"
-azure = "#0087ff"
-deep_turquoise = "#0087af"
-cola_blue = "#0087d7"
-bubble_pink = "#d75fff"
-shock_pink = "#ff5fff"
-hot_pink = "#e100ff"
-dark_pink = "#ff00d7"
-vapor_purple = "#8787ff"
-deep_purple = "#5f5faf"
-hulk_pants = "#9145ed"
-bone_white = "#e4e4e4"
-light_gray = "#808080"
-charcoal = "#303030"
-dark_gray = "#262626"
-eerie_black = "#1c1c1c"
-vampire_black = "#080808"
-# Overwrite existing color
-blue = "vapor_blue"
-green = "#00d72d"  # electro_green
-red = "#d75fff" # bubble_pink 
-white = "#e4e4e4" # bone_white 
+[custom.public_ip]
+disabled = false
+# when = 'which dig'
+when = true
+command = 'dig +short myip.opendns.com @resolver1.opendns.com'
+symbol = '󰲝'
+format = '[$symbol]($style inverted)[$output]($style)'
+style = 'bold fg:vapor_blue bg:background'
+
+#####
+
+# extras = ' 󰿘 󰳏  󰚐       '
