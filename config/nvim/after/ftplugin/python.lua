@@ -1,0 +1,29 @@
+-- vim options
+vim.o.tabstop=4
+vim.o.softtabstop=4
+vim.o.shiftwidth=4
+vim.o.textwidth=0
+vim.o.expandtab=true
+vim.o.autoindent=true
+vim.o.fileformat=unix
+
+-- tool
+vim.cmd("ALEEnable")
+
+-- env
+vim.api.nvim_buf_set_var(0, "ale_python_auto_pipenv", 1)
+vim.api.nvim_buf_set_var(0, "ale_python_auto_poetry", 1)
+vim.api.nvim_buf_set_var(0, "ale_python_auto_virtualenv", 1)
+vim.api.nvim_buf_set_var(0, "ale_python_flake8_auto_pipenv", 1)
+vim.api.nvim_buf_set_var(0, "ale_python_flake8_auto_poetry", 1)
+
+-- linters
+vim.api.nvim_buf_set_var(0, "ale_linters", {})
+
+-- fixers
+vim.api.nvim_buf_set_var(0, "ale_fixers", {
+  "remove_trailing_lines",
+  "trim_whitespace",
+  "isort",
+})
+vim.api.nvim_buf_set_var(0, "ale_fix_on_save", 1)
