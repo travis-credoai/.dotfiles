@@ -8,6 +8,18 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 lspconfig = require('lspconfig')
 lsputil = require('lspconfig/util')
 
+-- diagnostic
+-- ---------
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = '●', -- You can choose any prefix symbol
+    source = "always", -- This shows the source of the diagnostic
+  },
+  float = {
+    source = "always", -- This shows the source in hover windows
+  },
+})
+
 -- terraform
 ------------
 lspconfig.terraformls.setup{
