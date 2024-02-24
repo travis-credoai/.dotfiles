@@ -70,8 +70,8 @@ return require('packer').startup(function()
 
   use {
     'w0rp/ale',
-    ft = {'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'hcl',
-          'html', 'markdown', 'racket', 'vim', 'tex', 'yaml',
+    ft = {'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'elixir', 'hcl',
+          'html', 'markdown', 'python', 'racket', 'vim', 'tex', 'yaml',
           'yml', 'json', 'smarty', 'dockerfile'},
     cmd = 'ALEEnable',
     config = 'vim.cmd[[ALEEnable]]'

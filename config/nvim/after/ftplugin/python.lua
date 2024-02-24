@@ -5,10 +5,6 @@ vim.o.shiftwidth=4
 vim.o.textwidth=0
 vim.o.expandtab=true
 vim.o.autoindent=true
-vim.o.fileformat=unix
-
--- tool
-vim.cmd("ALEEnable")
 
 -- env
 vim.api.nvim_buf_set_var(0, "ale_python_auto_pipenv", 1)

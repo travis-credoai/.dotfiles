@@ -61,30 +61,87 @@ local function get_python_path(workspace)
   -- Fallback to system Python.
   return exepath('python3') or exepath('python') or 'python'
 end
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
--- lspconfig.pylsp.setup{
---   capabilities = capabilities,
---   settings = {
---     -- https://github.com/python-lsp/python-lsp-server
---     pylsp = {
---       plugins = {
---         pycodestyle = {
---           ignore = {'W391'},
---           maxLineLength = 100
---         },
---         yapf = {
---           based_on_style = 'pep8',
---           spaces_before_comment = '4'
---         }
---       }
---     }
---   }
--- }
 
-lspconfig.pyright.setup{
+-- disable completion in pylsp but retain formatting
+-- https://github.com/sublimelsp/LSP-pylsp/blob/master/README.md#running-alongside-lsp-pyright
+local pylsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+pylsp_capabilities.completionProvider = false
+pylsp_capabilities.definitionProvider = false
+pylsp_capabilities.documentHighlightProvider = false
+pylsp_capabilities.documentSymbolProvider = false
+pylsp_capabilities.hoverProvider = false
+pylsp_capabilities.referencesProvider = false
+pylsp_capabilities.renameProvider = false
+pylsp_capabilities.signatureHelpProvider = false
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
+-- https://github.com/python-lsp/python-lsp-server
+lspconfig.pylsp.setup{
+  capabilities = pylsp_capabilities,
   on_init = function(client) 
-    client.config.settings.python.pythonPath = get_python_path(client.config.root_dir)
+    client.config.settings.pylsp.plugins.jedi.environment = get_python_path(client.config.root_dir)
   end,
+  settings = {
+    pylsp = {
+      plugins = {
+        autopep8 = {
+          enabled = false
+        },
+        flake8 = {
+          enabled = false
+        },
+        jedi_completion = {
+          enabled = false
+        },
+        jedi_definition = {
+          enabled = false
+        },
+        jedi_hover = {
+          enabled = false
+        },
+        jedi_references = {
+          enabled = false
+        },
+        jedi_signature_help = {
+          enabled = false
+        },
+        jedi_symbols = {
+          enabled = false
+        },
+        pycodestyle = {
+          enabled = true,
+          ignore = {'W391'},
+          maxLineLength = 100
+        },
+        pydocstyle = {
+          enabled = true,
+        },
+        pyflakes = {
+          enabled = true,
+        },
+        pylint = {
+          enabled = true,
+        },
+        yapf = {
+          enabled = true,
+          based_on_style = 'pep8',
+          spaces_before_comment = '4'
+        },
+      }
+    }
+  }
+}
+
+local set_omnifunc = function(client, bufnr)
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+end
+
+-- https://packagecontrol.io/packages/LSP-pyright
+lspconfig.pyright.setup{
+  on_attach = set_omnifunc,
+  -- the code to get_python_path is not needed 
+  -- on_init = function(client) 
+  --   client.config.settings.python.pythonPath = get_python_path(client.config.root_dir)
+  -- end,
   capabilities = capabilities,
   settings = { }
 }
