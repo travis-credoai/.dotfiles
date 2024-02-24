@@ -46,6 +46,8 @@ return require('packer').startup(function()
   use 'jremmen/vim-ripgrep'
   use 'kien/ctrlp.vim'
   use 'neovim/nvim-lspconfig'
+  use 'nvim-lua/plenary.nvim'
+  use 'petertriho/cmp-git'
   use 'ray-x/go.nvim'
   use 'santiagovrancovich/nerdtree'
   use 'terryma/vim-expand-region'
