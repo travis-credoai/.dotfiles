@@ -46,6 +46,8 @@ return require('packer').startup(function()
   use 'jremmen/vim-ripgrep'
   use 'kien/ctrlp.vim'
   use 'neovim/nvim-lspconfig'
+  use 'nvim-lua/plenary.nvim'
+  use 'petertriho/cmp-git'
   use 'ray-x/go.nvim'
   use 'santiagovrancovich/nerdtree'
   use 'terryma/vim-expand-region'
@@ -70,8 +72,8 @@ return require('packer').startup(function()
 
   use {
     'w0rp/ale',
-    ft = {'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'hcl',
-          'html', 'markdown', 'racket', 'vim', 'tex', 'yaml',
+    ft = {'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'elixir', 'hcl',
+          'html', 'markdown', 'python', 'racket', 'vim', 'tex', 'yaml',
           'yml', 'json', 'smarty', 'dockerfile'},
     cmd = 'ALEEnable',
     config = 'vim.cmd[[ALEEnable]]'
