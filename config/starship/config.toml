@@ -162,8 +162,14 @@ denied_msg = '󱎘'
 format = '[$symbol]($style inverted)[$allowed|$loaded]($style)'
 style = 'bold fg:vapor_blue bg:background'
 
+[docker_context]
+disabled = true
+symbol = ' '
+
 [elixir]
 disabled = false
+format = '[$symbol]($style inverted)[$version|$otp_version]($style)'
+style = 'bold fg:vapor_blue bg:background'
 symbol = '󰖌 '
 
 [gcloud]
@@ -188,9 +194,8 @@ tag_disabled = false
 format = '([]($style inverted)[\[$all_status$ahead_behind\]]($style inverted)[]($style))'
 style = 'bold fg:bubble_pink bg:background'
 
-[docker_context]
-disabled = true
-symbol = ' '
+[line_break]
+disabled = false
 
 [kubernetes]
 disabled = false
