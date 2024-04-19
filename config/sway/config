@@ -50,7 +50,7 @@
     $laptop LVDS-1
     $monitor DP-1
     # $wallpaper /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png
-    $wallpaper ~/bg/antonkurbatov-basegrad.png
+    $wallpaper ~/bg/downtown-superboys-11
     # nag
     $nag         swaynagmode
     $nag_exit    $nag --exit
