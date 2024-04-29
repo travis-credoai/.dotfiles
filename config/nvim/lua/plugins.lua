@@ -20,10 +20,12 @@ return require('packer').startup(function()
   use ({
       'glepnir/galaxyline.nvim',
       branch = 'main',
-      config = function() require('themes/spaceline') end,
+      config = function() 
+        require('themes/eviline') 
+      end,
   })
   -- check back once  https://github.com/preservim/nerdtree/issues/1321 is resolved
-  -- use 'preservim/nerdtree'
+  use 'preservim/nerdtree'
   use ({
     '0x00-ketsu/autosave.nvim',
     config = function() require('autosave').setup{} end,
@@ -49,9 +51,12 @@ return require('packer').startup(function()
   use 'nvim-lua/plenary.nvim'
   use 'petertriho/cmp-git'
   use 'ray-x/go.nvim'
-  use 'santiagovrancovich/nerdtree'
+  -- use 'santiagovrancovich/nerdtree'
   use 'terryma/vim-expand-region'
-  use 'tjdevries/colorbuddy.nvim'
+  use {
+    'tjdevries/colorbuddy.nvim',
+    tag='v1.0.0',
+  } 
   use 'tmhedberg/SimpylFold'
   use 'towolf/vim-helm'
   use 'tpope/vim-commentary'
