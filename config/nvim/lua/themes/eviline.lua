@@ -80,14 +80,14 @@ gls.left[7] = {
   }
 }
 
-gls.left[8] = {
+gls.mid[1] = {
   DiagnosticError = {
     provider = 'DiagnosticError',
     icon = '  ',
     highlight = {cb_red,cb_bg}
   }
 }
-gls.left[9] = {
+gls.mid[2] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
@@ -95,7 +95,7 @@ gls.left[9] = {
   }
 }
 
-gls.left[10] = {
+gls.mid[3] = {
   DiagnosticHint = {
     provider = 'DiagnosticHint',
     icon = '  ',
@@ -103,7 +103,7 @@ gls.left[10] = {
   }
 }
 
-gls.left[11] = {
+gls.mid[4] = {
   DiagnosticInfo = {
     provider = 'DiagnosticInfo',
     icon = '  ',
@@ -111,7 +111,7 @@ gls.left[11] = {
   }
 }
 
-gls.mid[1] = {
+gls.mid[5] = {
   ShowLspClient = {
     provider = 'GetLspClient',
     condition = function ()
@@ -123,6 +123,24 @@ gls.mid[1] = {
     end,
     icon = ' LSP:',
     highlight = {cb_cyan,cb_bg,'bold'}
+  }
+}
+
+gls.mid[6] = {
+  GitIcon = {
+    provider = function() return '  ' end,
+    condition = condition.check_git_workspace,
+    separator = ' ',
+    separator_highlight = {'NONE',cb_bg},
+    highlight = {cb_violet,cb_bg,'bold'},
+  }
+}
+
+gls.mid[7] = {
+  GitBranch = {
+    provider = 'GitBranch',
+    condition = condition.check_git_workspace,
+    highlight = {cb_violet,cb_bg,'bold'},
   }
 }
 
@@ -147,24 +165,6 @@ gls.right[2] = {
 }
 
 gls.right[3] = {
-  GitIcon = {
-    provider = function() return '  ' end,
-    condition = condition.check_git_workspace,
-    separator = ' ',
-    separator_highlight = {'NONE',cb_bg},
-    highlight = {cb_violet,cb_bg,'bold'},
-  }
-}
-
-gls.right[4] = {
-  GitBranch = {
-    provider = 'GitBranch',
-    condition = condition.check_git_workspace,
-    highlight = {cb_violet,cb_bg,'bold'},
-  }
-}
-
-gls.right[5] = {
   DiffAdd = {
     provider = 'DiffAdd',
     condition = condition.hide_in_width,
@@ -172,7 +172,7 @@ gls.right[5] = {
     highlight = {cb_green,cb_bg},
   }
 }
-gls.right[6] = {
+gls.right[4] = {
   DiffModified = {
     provider = 'DiffModified',
     condition = condition.hide_in_width,
@@ -180,7 +180,7 @@ gls.right[6] = {
     highlight = {cb_orange,cb_bg},
   }
 }
-gls.right[7] = {
+gls.right[5] = {
   DiffRemove = {
     provider = 'DiffRemove',
     condition = condition.hide_in_width,
@@ -189,7 +189,7 @@ gls.right[7] = {
   }
 }
 
-gls.right[8] = {
+gls.right[6] = {
   RainbowBlue = {
     provider = function() return ' ▊' end,
     highlight = {cb_blue,cb_bg}
