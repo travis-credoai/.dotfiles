@@ -32,6 +32,7 @@ key_mapper('n', '<leader>w', ':w<CR>')
 key_mapper('n', '<leader>w-', ':set nowrap<CR>')
 key_mapper('n', '<leader>w=', ':set wrap<CR>')
 key_mapper('n', '<leader>oo', ':only<CR>')
+key_mapper('n', '<leader>=', ':wincmd =<CR>')
 vim.g.SimpylFold_docstring_preview=1
 vim.g.NERDTreeWinSize=35
 vim.g.NERDTreeAutoCenter=1
