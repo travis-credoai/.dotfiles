@@ -20,10 +20,18 @@ vim.api.nvim_create_autocmd({"BufRead"}, {
       vim.diagnostic.disable(0)
       vim.api.nvim_buf_set_var(0, "ale_fix_on_save", 0)
       vim.api.nvim_buf_set_var(0, "ale_linters", {})
+    elseif string.match(event.file, ".*templates.*") then
+      -- print("Yaml autocommand called for file: " .. event.file)
+      new_fixers = vim.deepcopy(vim.api.nvim_buf_get_var(0, "ale_fixers"))
+      idx = indexOf(new_fixers, "yamlfmt")
+      if idx then
+        table.remove(new_fixers, idx)
+      end
+      vim.diagnostic.disable(0)
+      vim.api.nvim_buf_set_var(0, "ale_fixers", new_fixers)
     else
       -- print("Normal yaml file")
       vim.api.nvim_buf_set_var(0, "ale_fix_on_save", 1)
     end
   end,
 })
-
