@@ -164,7 +164,7 @@ lspconfig.yamlls.setup{
 
 -- don't run yamlls on helm template yamls
 vim.api.nvim_create_autocmd({"BufRead"}, {
-  pattern = {"*/templates/**/*.yaml"},
+  pattern = {"**/templates/*.yaml"},
   callback = function() 
     vim.diagnostic.disable(0)
   end,

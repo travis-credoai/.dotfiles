@@ -21,3 +21,12 @@ vim.api.nvim_create_autocmd({"User"}, {
   pattern = {"ALEFixPost"},
   callback = RevertOriginalDir,
 })
+
+function indexOf(tbl, value)
+    for index, val in ipairs(tbl) do
+        if val == value then
+            return index
+        end
+    end
+    return nil -- Value not found
+end
