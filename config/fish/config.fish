@@ -58,6 +58,7 @@ set -g fish_pager_color_description $vapor_purple
 set -g fish_pager_color_selected_background --background=$selection
 
 starship init fish | source
+enable_transience
 
 if test -f ~/.config/fish/env.fish
     source ~/.config/fish/env.fish
