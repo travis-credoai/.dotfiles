@@ -127,16 +127,15 @@ purple = '#9d7cd8'
 cyan = '#7dcfff'
 pink = '#bb9af7'
 
-
-
 [aws]
 disabled = false
 symbol = '󰸏'
-format = '[]($style)[$symbol]($style inverted)[($profile)(\($region\))(\[$duration\])]($style)'
+format = '[]($style)[$symbol]($style inverted)[($profile)($region)(\[$duration\])]($style)'
 style = 'bold fg:vapor_blue bg:background'
 region_aliases = { us-west-2 = "usw2" }
 
 [battery]
+disabled = true
 full_symbol = ''
 charging_symbol = ''
 discharging_symbol = ''
@@ -149,7 +148,7 @@ error_symbol = '[❯](bold fg:bubble_pink)'
 
 [directory]
 truncation_symbol = '…/'
-format = '[ $symbol]($style inverted)[$path]($style)'
+format = '[ $symbol]($style inverted)[$path]($style)'
 style = 'bold fg:vapor_blue bg:background'
 
 [direnv]
@@ -159,7 +158,7 @@ loaded_msg = ''
 unloaded_msg = ''
 allowed_msg = ''
 denied_msg = '󱎘'
-format = '[]($style)[$symbol]($style inverted)[$allowed|$loaded]($style)'
+format = '[]($style)[$symbol]($style inverted)[$allowed|$loaded]($style)'
 style = 'bold fg:vapor_blue bg:background'
 
 [docker_context]
@@ -168,30 +167,34 @@ symbol = ' '
 
 [elixir]
 disabled = false
-format = '[$symbol]($style inverted)[$version|$otp_version]($style)'
+format = '[]$(style)[$symbol]($style inverted)[$version|$otp_version]($style)'
 style = 'bold fg:vapor_blue bg:background'
 symbol = '󰖌 '
 
 [gcloud]
-symbol = ' '
+disabled = true
+format = '[]($style)[$symbol]($style inverted)[$account(@$domain)($region)]($style)'
+style = 'bold fg:vapor_blue bg:background'
+symbol = ''
 
 [git_branch]
 disabled = false
 symbol = '󰳏'
-format = '[]($style)[$symbol]($style inverted)[$branch(:$remote_branch)]($style)'
+format = '[]($style)[$symbol]($style inverted)[$branch(:$remote_branch)]($style)'
 style = 'bold fg:vapor_blue bg:background'
 truncation_length = 32
 only_attached = true
 
 [git_commit]
 disabled = false
-format = '[]($style)[$symbol\($hash$tag\)]($style inverted)[]($style)'
+tag_symbol = ''
+format = ' [$hash $tag]($style)'
 style = 'bold fg:vapor_blue bg:background'
 only_detached = false
 tag_disabled = false
 
 [git_status]
-format = '([]($style inverted)[\[$all_status$ahead_behind\]]($style inverted)[]($style))'
+format = '([]($style)[$all_status$ahead_behind]($style inverted)[]($style))'
 style = 'bold fg:bubble_pink bg:background'
 
 [line_break]
@@ -200,7 +203,7 @@ disabled = false
 [kubernetes]
 disabled = false
 symbol = '☸'
-format = '[]($style)[$symbol]($style inverted)[$context( \($namespace\))]($style)'
+format = '[]($style)[$symbol]($style inverted)[$context( $namespace)]($style)'
 style = 'bold fg:vapor_blue bg:background'
 contexts = [
     { context_pattern = '.*prd.*', style = 'fg:red' },
@@ -209,16 +212,20 @@ contexts = [
 
 [memory_usage]
 disabled = false
+format = '[]($style)[$symbol]($style inverted)[$ram_pct]($style)'
+style = 'bold fg:vapor_blue bg:background'
+symbol = '󰘚'
 
 [nodejs]
 symbol = ''
-format = '[]($style)[$symbol]($style inverted)[$version]($style)'
+format = '[]($style)[$symbol]($style inverted)[$version]($style)'
 style = 'bold fg:vapor_blue bg:background'
 
 [package]
 disabled = true
 
 [python]
+format = '[]($style)[$symbol]($style inverted)[$pyenv_prefix(${version})( $virtualenv)]($style)'
 symbol = ''
 style = 'bold fg:vapor_blue bg:background'
 
@@ -227,16 +234,19 @@ symbol = ''
 style = 'bold fg:vapor_blue bg:background'
 
 [terraform]
+format = '[]($style)[$symbol]($style inverted)[$version]($style)'
+version_format = 'v${major}.${minor}'
+detect_files = ['terragrunt.hcl']
 symbol = '󱁢'
 style = 'bold fg:vapor_blue bg:background'
 
 [custom.public_ip]
-disabled = false
+disabled = true
 # when = 'which dig'
 when = true
 command = 'dig +short myip.opendns.com @resolver1.opendns.com'
 symbol = '󰲝'
-format = '[]($style)[$symbol]($style inverted)[$output]($style)'
+format = '[]($style)[$symbol]($style inverted)[$output]($style)'
 style = 'bold fg:vapor_blue bg:background'
 
 #####
