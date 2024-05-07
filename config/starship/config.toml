@@ -91,7 +91,7 @@ palette = 'vapors'
 
 # Define custom colors
 [palettes.vapors]
-background = '#262626' # linked to terminal colors
+# background = '#262626' # linked to terminal colors
 # electro_green = '#00d72d'  # old
 electro_green = '#12e03d'
 guppie_green = '#00f77b' 
@@ -132,7 +132,7 @@ pink = '#bb9af7'
 [aws]
 disabled = false
 symbol = '󰸏'
-format = '[$symbol]($style inverted)[($profile)(\($region\))(\[$duration\])]($style)'
+format = '[]($style)[$symbol]($style inverted)[($profile)(\($region\))(\[$duration\])]($style)'
 style = 'bold fg:vapor_blue bg:background'
 region_aliases = { us-west-2 = "usw2" }
 
@@ -159,7 +159,7 @@ loaded_msg = ''
 unloaded_msg = ''
 allowed_msg = ''
 denied_msg = '󱎘'
-format = '[$symbol]($style inverted)[$allowed|$loaded]($style)'
+format = '[]($style)[$symbol]($style inverted)[$allowed|$loaded]($style)'
 style = 'bold fg:vapor_blue bg:background'
 
 [docker_context]
@@ -178,20 +178,20 @@ symbol = ' '
 [git_branch]
 disabled = false
 symbol = '󰳏'
-format = '[$symbol]($style inverted)[$branch(:$remote_branch)]($style)'
+format = '[]($style)[$symbol]($style inverted)[$branch(:$remote_branch)]($style)'
 style = 'bold fg:vapor_blue bg:background'
 truncation_length = 32
 only_attached = true
 
 [git_commit]
 disabled = false
-format = '[$symbol\($hash$tag\)]($style inverted)[]($style)'
+format = '[]($style)[$symbol\($hash$tag\)]($style inverted)[]($style)'
 style = 'bold fg:vapor_blue bg:background'
 only_detached = false
 tag_disabled = false
 
 [git_status]
-format = '([]($style inverted)[\[$all_status$ahead_behind\]]($style inverted)[]($style))'
+format = '([]($style inverted)[\[$all_status$ahead_behind\]]($style inverted)[]($style))'
 style = 'bold fg:bubble_pink bg:background'
 
 [line_break]
@@ -200,7 +200,7 @@ disabled = false
 [kubernetes]
 disabled = false
 symbol = '☸'
-format = '[$symbol]($style inverted)[$context( \($namespace\))]($style)'
+format = '[]($style)[$symbol]($style inverted)[$context( \($namespace\))]($style)'
 style = 'bold fg:vapor_blue bg:background'
 contexts = [
     { context_pattern = '.*prd.*', style = 'fg:red' },
@@ -212,7 +212,7 @@ disabled = false
 
 [nodejs]
 symbol = ''
-format = '[$symbol]($style inverted)[$version]($style)'
+format = '[]($style)[$symbol]($style inverted)[$version]($style)'
 style = 'bold fg:vapor_blue bg:background'
 
 [package]
@@ -236,9 +236,9 @@ disabled = false
 when = true
 command = 'dig +short myip.opendns.com @resolver1.opendns.com'
 symbol = '󰲝'
-format = '[$symbol]($style inverted)[$output]($style)'
+format = '[]($style)[$symbol]($style inverted)[$output]($style)'
 style = 'bold fg:vapor_blue bg:background'
 
 #####
 
-# extras = ' 󰿘 󰳏  󰚐       '
+# extras = ' 󰿘 󰳏  󰚐        ﳚ '
