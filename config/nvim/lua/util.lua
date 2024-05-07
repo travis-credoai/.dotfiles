@@ -24,6 +24,21 @@ M.key_mapper = function(mode, key, result)
 end
 
 
+function FindGitRootDir(bufnr)
+  bufnr = bufnr or vim.fn.bufnr('%')
+  local buf_path = vim.fn.expand('#' .. bufnr .. ':p:h')
+  local original_dir = vim.fn.getcwd()
+  vim.fn.chdir(buf_path)
+  local git_root = vim.fn.system('git rev-parse --show-toplevel'):gsub('\n', '')
+  vim.fn.chdir(original_dir)
+  if vim.v.shell_error == 0 then
+    print('Found git root for file: ' .. git_root)
+    return git_root
+  else
+    return nil
+  end
+end
+
 function SetGitRootDir()
   util_original_dir = vim.fn.getcwd()
   local git_root = FindGitRootDir()
