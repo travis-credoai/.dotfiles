@@ -4,3 +4,13 @@ vim.api.nvim_buf_set_var(0, "ale_fixers", {
   "trim_whitespace",
   "prettier",
 })
+<<<<<<< HEAD
+=======
+
+vim.api.nvim_create_autocmd( 'FileType', { pattern = 'markdown',
+callback = function(args)
+  vim.treesitter.start(args.buf, 'markdown')
+  vim.bo[args.buf].syntax = 'on'  -- only if additional legacy syntax is needed
+end
+})
+>>>>>>> b83550f (Work updates (#4))
