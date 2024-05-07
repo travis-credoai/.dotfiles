@@ -11,8 +11,8 @@ vim.api.nvim_buf_set_var(0, "ale_linters", {"yamllint"})
 
 vim.api.nvim_buf_set_var(0, "ale_fix_on_save", 1)
 
-vim.api.nvim_create_autocmd({"BufRead"}, {
-  pattern = {"*"},
+vim.api.nvim_create_autocmd({"FileType"}, {
+  pattern = {"yaml"},
   callback = function(event) 
     -- print("Yaml autocommand called for file: " .. event.file)
     if string.match(event.file, ".*gotk-.*") then
