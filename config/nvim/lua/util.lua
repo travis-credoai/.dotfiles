@@ -8,7 +8,6 @@ function FindGitRootDir(bufnr)
   local git_root = vim.fn.system('git rev-parse --show-toplevel'):gsub('\n', '')
   vim.fn.chdir(original_dir)
   if vim.v.shell_error == 0 then
-    print('Found git root for file: ' .. git_root)
     return git_root
   else
     return nil
@@ -19,13 +18,11 @@ function SetGitRootDir()
   util_original_dir = vim.fn.getcwd()
   local git_root = FindGitRootDir()
   if git_root then
-    print('Setting currunt dir before ALE fixing: ' .. git_root)
     vim.api.nvim_set_current_dir(git_root)
   end
 end
 
 function RevertOriginalDir()
-  print('Reverting currunt dir after ALE fixing: ' .. util_original_dir)
   vim.api.nvim_set_current_dir(util_original_dir)
 end
 
