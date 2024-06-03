@@ -12,7 +12,7 @@
     # terminal emulator
     $term foot
     # fonts
-    $uiFont Hack
+    $uiFont Hack Nerd Font Mono
     $nerdish Nerd Font Mono
     $statusFont ShureTechMono Nerd Font Mono
     # styles
@@ -28,7 +28,7 @@
     $supaHighlight #ff5fff
     # application launcher
     $menu bemenu-run \
-      --fn "$uiFont 28" \
+      --fn "$statusFont 28" \
       --ignorecase \
       --list 3 \
       --hp 50 \
@@ -63,7 +63,7 @@
   # # -R is recommended for swaynag_command so that, upon a syntax error in your sway config, the
   #   # 'Reload Sway' option will be initially selected instead of the 'Exit Sway' option
   title_align center
-  font pango:$uiFont 20
+  font pango:$statusFont 20
   gaps inner 5
   swaynag_command $nag -R
   client.focused $hiBackground $hiBackground $hideout $supaHighlight
