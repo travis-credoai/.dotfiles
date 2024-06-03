@@ -105,4 +105,40 @@ function MakeYamlfmtOptions()
   return options
 end
 
+-- under development
+-- -----------------
+-- Function to check if a file exists
+local function file_exists(file)
+  local f = io.open(file, "r")
+  if f then
+    io.close(f)
+    return true
+  else
+    return false
+  end
+end
+
+-- Function to close buffers with deleted files
+local function close_buffers_with_deleted_files()
+  -- Get a list of all buffers
+  local buffers = vim.api.nvim_list_bufs()
+  
+  -- Iterate over each buffer
+  for _, buf in ipairs(buffers) do
+    -- Check if the buffer is loaded and has a file associated with it
+    if vim.api.nvim_buf_is_loaded(buf) then
+      local filename = vim.api.nvim_buf_get_name(buf)
+      if filename ~= "" and not file_exists(filename) then
+        -- Close the buffer if the file does not exist
+        vim.api.nvim_buf_delete(buf, { force = true })
+      end
+    end
+  end
+end
+
+-- Command to trigger the function
+vim.api.nvim_create_user_command('CloseDeletedBuffers', close_buffers_with_deleted_files, {})
+-- -----------------
+-- under development
+
 return M
