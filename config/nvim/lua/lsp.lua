@@ -1,3 +1,5 @@
+local util = require('util')
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
@@ -18,6 +20,27 @@ vim.diagnostic.config({
   float = {
     source = "always", -- This shows the source in hover windows
   },
+})
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client.supports_method('textDocument') then
+      util.key_mapper('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
+      util.key_mapper('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+      util.key_mapper('n', '<leader>gd', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
+      util.key_mapper('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
+      util.key_mapper('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+      util.key_mapper('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+      util.key_mapper('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+    end
+    if client.supports_method('textDocument/rename') then
+      util.key_mapper('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+    end
+    if client.supports_method('textDocument/implementation') then
+      util.key_mapper('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+    end
+  end,
 })
 
 -- terraform
@@ -202,7 +225,8 @@ vim.api.nvim_create_autocmd({"BufWritePre"}, {
 ---------
 lspconfig.elixirls.setup{
   capabilities = capabilities,
-  cmd = {"/opt/homebrew/opt/elixir-ls/bin/elixir-ls"},
+  -- cmd = {"/opt/homebrew/opt/elixir-ls/bin/elixir-ls"},
+  cmd = { os.getenv("ELIXIR_LS_PATH") .. "/elixir-ls"},
   settings = {
   }
 }
