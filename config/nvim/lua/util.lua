@@ -1,19 +1,5 @@
 local M = {}
 
-function FindGitRootDir(bufnr)
-  bufnr = bufnr or vim.fn.bufnr('%')
-  local buf_path = vim.fn.expand('#' .. bufnr .. ':p:h')
-  local original_dir = vim.fn.getcwd()
-  vim.fn.chdir(buf_path)
-  local git_root = vim.fn.system('git rev-parse --show-toplevel'):gsub('\n', '')
-  vim.fn.chdir(original_dir)
-  if vim.v.shell_error == 0 then
-    return git_root
-  else
-    return nil
-  end
-end
-
 M.key_mapper = function(mode, key, result)
   vim.api.nvim_set_keymap(
     mode,
@@ -32,7 +18,7 @@ function FindGitRootDir(bufnr)
   local git_root = vim.fn.system('git rev-parse --show-toplevel'):gsub('\n', '')
   vim.fn.chdir(original_dir)
   if vim.v.shell_error == 0 then
-    print('Found git root for file: ' .. git_root)
+    -- print('Found git root for file: ' .. git_root)
     return git_root
   else
     return nil
@@ -48,7 +34,7 @@ function SetGitRootDir()
 end
 
 function RevertOriginalDir()
-  print('Reverting currunt dir after ALE fixing: ' .. util_original_dir)
+  -- print('Reverting currunt dir after ALE fixing: ' .. util_original_dir)
   vim.api.nvim_set_current_dir(util_original_dir)
 end
 
