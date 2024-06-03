@@ -167,7 +167,7 @@ symbol = ' '
 
 [elixir]
 disabled = false
-format = '[]$(style)[$symbol]($style inverted)[$version|$otp_version]($style)'
+format = '[]($style)[$symbol]($style inverted)[$version|$otp_version]($style)'
 style = 'bold fg:vapor_blue bg:background'
 symbol = '󰖌 '
 
