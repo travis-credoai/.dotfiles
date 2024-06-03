@@ -274,7 +274,6 @@ vim.api.nvim_create_autocmd({"BufWritePre"}, {
 ---------
 lspconfig.elixirls.setup{
   capabilities = capabilities,
-  -- cmd = {"/opt/homebrew/opt/elixir-ls/bin/elixir-ls"},
   cmd = { os.getenv("ELIXIR_LS_PATH") or "/usr/bin" .. "/elixir-ls" },
   settings = {
   }
