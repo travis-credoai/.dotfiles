@@ -1,4 +1,4 @@
-util_original_dir = vim.fn.getcwd()
+local M = {}
 
 function FindGitRootDir(bufnr)
   bufnr = bufnr or vim.fn.bufnr('%')
@@ -13,6 +13,16 @@ function FindGitRootDir(bufnr)
     return nil
   end
 end
+
+M.key_mapper = function(mode, key, result)
+  vim.api.nvim_set_keymap(
+    mode,
+    key,
+    result,
+    {noremap = true, silent = true}
+  )
+end
+
 
 function SetGitRootDir()
   util_original_dir = vim.fn.getcwd()
@@ -93,3 +103,5 @@ function MakeYamlfmtOptions()
   end
   return options
 end
+
+return M
