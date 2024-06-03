@@ -36,6 +36,7 @@ vim.cmd([[
 ]])
 vim.g.NERDTreeDirArrowExpandable=''
 vim.g.NERDTreeDirArrowCollapsible=''
+vim.g.NERDTreeQuitOnOpen=1
 
 -- UltiSnips
 vim.g.UltiSnipsExpandTrigger = '<C-J>'
