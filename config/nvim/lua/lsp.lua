@@ -10,6 +10,38 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 lspconfig = require('lspconfig')
 lsputil = require('lspconfig/util')
 
+-- general
+-- -------
+local set_omnifunc = function(client, bufnr)
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+end
+
+local function lsp_formatting_on_save(client, bufnr)
+  -- Enable formatting on save
+  if client.server_capabilities.documentFormattingProvider then
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = vim.api.nvim_create_augroup("LspFormatting", { clear = true }),
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({ async = false })
+      end,
+    })
+  end
+end
+
+local function lsp_org_imports_on_save(client, bufnr)
+  -- Enable formatting on save
+  -- print(vim.inspect(client.server_capabilities))
+  if client.server_capabilities.codeActionProvider then
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = vim.api.nvim_create_augroup("LspOrgImports", { clear = true }),
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+      end,
+    })
+  end
+end
 -- diagnostic
 -- ---------
 vim.diagnostic.config({
@@ -96,6 +128,10 @@ pylsp_capabilities.hoverProvider = false
 pylsp_capabilities.referencesProvider = false
 pylsp_capabilities.renameProvider = false
 pylsp_capabilities.signatureHelpProvider = false
+
+local function on_attach_pylsp(client, bufnr)
+    lsp_formatting_on_save(client, bufnr)
+end
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
 -- https://github.com/python-lsp/python-lsp-server
 lspconfig.pylsp.setup{
@@ -103,6 +139,7 @@ lspconfig.pylsp.setup{
   on_init = function(client) 
     client.config.settings.pylsp.plugins.jedi.environment = get_python_path(client.config.root_dir)
   end,
+  on_attach = on_attach_pylsp,
   settings = {
     pylsp = {
       plugins = {
@@ -144,6 +181,9 @@ lspconfig.pylsp.setup{
         pylint = {
           enabled = true,
         },
+        pylsp_mypy = {
+          enabled = false,
+        },
         yapf = {
           enabled = true,
           based_on_style = 'pep8',
@@ -154,13 +194,22 @@ lspconfig.pylsp.setup{
   }
 }
 
-local set_omnifunc = function(client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-end
+-- vim.api.nvim_create_autocmd({"BufWritePre"}, {
+--   pattern = {"*.py"},
+--   callback = function() 
+--     vim.lsp.buf.format({async=true})
+--     -- vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+--   end,
+-- })
 
+local function on_attach_pyright(client, bufnr)
+    set_omnifunc(client, bufnr)
+    lsp_org_imports_on_save(client, bufnr)
+    -- Call additional setup functions here
+end
 -- https://packagecontrol.io/packages/LSP-pyright
 lspconfig.pyright.setup{
-  on_attach = set_omnifunc,
+  on_attach = on_attach_pyright,
   -- the code to get_python_path is not needed 
   -- on_init = function(client) 
   --   client.config.settings.python.pythonPath = get_python_path(client.config.root_dir)
