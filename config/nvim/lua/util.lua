@@ -9,7 +9,6 @@ M.key_mapper = function(mode, key, result)
   )
 end
 
-
 function FindGitRootDir(bufnr)
   bufnr = bufnr or vim.fn.bufnr('%')
   local buf_path = vim.fn.expand('#' .. bufnr .. ':p:h')
