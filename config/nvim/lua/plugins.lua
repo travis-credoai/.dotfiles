@@ -36,6 +36,7 @@ return require('packer').startup(function()
   use 'cappyzawa/starlark.vim'
   use 'dag/vim-fish'
   use 'glench/vim-jinja2-syntax'
+  use 'grafana/vim-alloy'
   use 'google/vim-jsonnet'
   use 'haggishunk/the-vapors.nvim'
   use 'hrsh7th/cmp-buffer'
