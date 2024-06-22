@@ -144,4 +144,17 @@ vim.api.nvim_create_user_command('CloseDeletedBuffers', close_buffers_with_delet
 -- -----------------
 -- under development
 
+M.saveTempSession = function()
+  -- local session_name = GenerateUniqueSessionName()
+  local session_name = '/tmp/session_' .. os.date("%Y%m%d_%H%M%S") .. '.vim'
+  -- print('saved temp session: ' .. session_name)
+  vim.cmd('mksession! ' .. session_name)
+  vim.g.last_session = session_name
+end
+
+M.restoreTempSession = function()
+  -- print('restored temp session: ' .. vim.g.last_session)
+  vim.cmd('source ' .. vim.g.last_session)
+end
+
 return M
