@@ -103,6 +103,8 @@
 #
   # Start a terminal
   bindsym $mod+Return exec $term
+  bindsym $mod+shift+Return exec $term $SHELL -c "tmuxinator start sanctum"
+  bindsym $mod+ctrl+Return exec $term $SHELL -c "tmuxinator start system"
 
   # Kill focused window
   bindsym $mod+q kill
