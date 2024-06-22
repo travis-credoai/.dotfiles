@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       util.key_mapper('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
       util.key_mapper('n', '<leader>gds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
       util.key_mapper('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-      util.key_mapper('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+      util.key_mapper('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
       util.key_mapper('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
       util.key_mapper('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format({async=true})<CR>')
     end
@@ -76,7 +76,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       util.key_mapper('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
     end
     if client.supports_method('textDocument/implementation') then
-      util.key_mapper('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+      util.key_mapper('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
     end
   end,
 })
