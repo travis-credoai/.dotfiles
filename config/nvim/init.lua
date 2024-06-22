@@ -1,5 +1,6 @@
 -- mine
 require('completion')
+require('ft') -- one time filetype settings, not per buffer
 require('keymaps')
 require('lsp')
 require('options')

@@ -58,11 +58,13 @@ end
 
 function FindYamllintConfig(root_dir)
   root_dir = root_dir or vim.fn.getcwd()
+  -- print('Looking for yamllint in ' .. root_dir)
   local filenames = {'.yamllint', '.yamllint.yaml', '.yamllint.yml'}
 
   for _, filename in ipairs(filenames) do
     filepath = root_dir .. '/' .. filename
     if vim.fn.filereadable(filepath) == 1 then
+      -- print('Found yamllint ' .. filepath)
       return filepath
     end
   end
@@ -70,8 +72,8 @@ function FindYamllintConfig(root_dir)
   return nil
 end
 
-function MakeYamllintOptions()
-  local git_root = FindGitRootDir(0)
+function MakeYamllintOptions(bufnr)
+  local git_root = FindGitRootDir(bufnr)
   options = ''
   local config = FindYamllintConfig(git_root)
   if config then
@@ -82,11 +84,13 @@ end
 
 function FindYamlfmtConfig(root_dir)
   root_dir = root_dir or vim.fn.getcwd()
+  -- print('Looking for yamlfmt in ' .. root_dir)
   local filenames = {'.yamlfmt'}
 
   for _, filename in ipairs(filenames) do
     filepath = root_dir .. '/' .. filename
     if vim.fn.filereadable(filepath) == 1 then
+      -- print('Found yamlfmt ' .. filepath)
       return filepath
     end
   end
@@ -94,8 +98,8 @@ function FindYamlfmtConfig(root_dir)
   return nil
 end
 
-function MakeYamlfmtOptions()
-  local git_root = FindGitRootDir(0)
+function MakeYamlfmtOptions(bufnr)
+  local git_root = FindGitRootDir(bufnr)
   options = ''
   local config = FindYamlfmtConfig(git_root)
   if config then

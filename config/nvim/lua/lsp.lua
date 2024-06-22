@@ -59,12 +59,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client.supports_method('textDocument') then
       util.key_mapper('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-      util.key_mapper('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
-      util.key_mapper('n', '<leader>gd', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
-      util.key_mapper('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
+      util.key_mapper("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
+      util.key_mapper("n", "gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>")
+      util.key_mapper("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
+      util.key_mapper("n", "gpD", "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>")
+      util.key_mapper("n", "gpl", "<cmd>lua require('goto-preview').goto_preview_references()<CR>")
+      util.key_mapper("n", "gQ", "<cmd>lua require('goto-preview').close_all_win()<CR>")
+      util.key_mapper('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+      util.key_mapper('n', '<leader>gds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
+      util.key_mapper('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>')
       util.key_mapper('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
       util.key_mapper('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-      util.key_mapper('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+      util.key_mapper('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format({async=true})<CR>')
     end
     if client.supports_method('textDocument/rename') then
       util.key_mapper('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
@@ -142,6 +148,7 @@ lspconfig.pylsp.setup{
   on_attach = on_attach_pylsp,
   settings = {
     pylsp = {
+      cmd = {"pylsp", "-vvv"},
       plugins = {
         autopep8 = {
           enabled = false
@@ -181,11 +188,19 @@ lspconfig.pylsp.setup{
         pylint = {
           enabled = true,
         },
+        pylsp_black = {
+          enabled = false,
+        },
         pylsp_mypy = {
           enabled = false,
         },
-        yapf = {
+        -- https://github.com/python-lsp/python-lsp-ruff?tab=readme-ov-file#configuration
+        ruff = {
           enabled = true,
+          formatEnabled = true,
+        },
+        yapf = {
+          enabled = false,
           based_on_style = 'pep8',
           spaces_before_comment = '4'
         },
@@ -270,11 +285,18 @@ vim.api.nvim_create_autocmd({"BufWritePre"}, {
   end,
 })
 
+-- typescript
+---------
+lspconfig.tsserver.setup{
+  capabilities = capabilities,
+}
+
+
 -- elixir
 ---------
 lspconfig.elixirls.setup{
   capabilities = capabilities,
-  cmd = { os.getenv("ELIXIR_LS_PATH") or "/usr/bin" .. "/elixir-ls" },
+  cmd = { os.getenv("ELIXIR_LS_PATH") .. "/elixir-ls" or "/usr/bin" .. "/elixir-ls" },
   settings = {
   }
 }

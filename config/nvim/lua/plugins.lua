@@ -36,9 +36,12 @@ return require('packer').startup(function()
   use 'cappyzawa/starlark.vim'
   use 'dag/vim-fish'
   use 'glench/vim-jinja2-syntax'
-  use 'grafana/vim-alloy'
   use 'google/vim-jsonnet'
-  use 'haggishunk/the-vapors.nvim'
+  use 'grafana/vim-alloy'
+  use { 
+    'haggishunk/the-vapors.nvim',
+    branch='modify-main-color'
+  }
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/cmp-nvim-lsp'
@@ -49,6 +52,7 @@ return require('packer').startup(function()
   use 'jremmen/vim-ripgrep'
   use 'kien/ctrlp.vim'
   use 'neovim/nvim-lspconfig'
+  use 'nickeb96/fish.vim'
   use 'nvim-lua/plenary.nvim'
   use 'petertriho/cmp-git'
   use 'ray-x/go.nvim'
@@ -58,8 +62,20 @@ return require('packer').startup(function()
     'tjdevries/colorbuddy.nvim',
     tag='v1.0.0',
   } 
+  use {
+    'rmagatti/goto-preview',
+    config = function()
+      require('goto-preview').setup {}
+    end
+  }
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.6',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  use 'sharkdp/fd'
   use 'tmhedberg/SimpylFold'
   use 'towolf/vim-helm'
+  use 'tpope/vim-rhubarb'
   use 'tpope/vim-commentary'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-obsession'
