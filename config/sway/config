@@ -30,6 +30,7 @@
     # application launcher
     $menu bemenu-run \
       --fn "$statusFont 28" \
+      --auto-select \
       --ignorecase \
       --list 3 \
       --hp 50 \
