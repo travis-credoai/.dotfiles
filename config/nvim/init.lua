@@ -7,5 +7,6 @@ require('options')
 require('plugins')
 require('treesitter')
 require('util')
+require('ui')
 -- external
 require('colorbuddy').colorscheme('the-vapors')

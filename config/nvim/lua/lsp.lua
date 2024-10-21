@@ -180,13 +180,16 @@ lspconfig.pylsp.setup{
           maxLineLength = 100
         },
         pydocstyle = {
-          enabled = true,
+          enabled = false,
         },
         pyflakes = {
-          enabled = true,
+          enabled = false,
         },
         pylint = {
-          enabled = true,
+          enabled = false,
+        },
+        pylsp_black = {
+          enabled = false,
         },
         pylsp_black = {
           enabled = false,
@@ -219,7 +222,7 @@ lspconfig.pylsp.setup{
 
 local function on_attach_pyright(client, bufnr)
     set_omnifunc(client, bufnr)
-    lsp_org_imports_on_save(client, bufnr)
+    -- lsp_org_imports_on_save(client, bufnr)
     -- Call additional setup functions here
 end
 -- https://packagecontrol.io/packages/LSP-pyright

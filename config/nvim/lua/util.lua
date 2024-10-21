@@ -13,13 +13,25 @@ function FindGitRootDir(bufnr)
   bufnr = bufnr or vim.fn.bufnr('%')
   local buf_path = vim.fn.expand('#' .. bufnr .. ':p:h')
   local original_dir = vim.fn.getcwd()
-  vim.fn.chdir(buf_path)
-  local git_root = vim.fn.system('git rev-parse --show-toplevel'):gsub('\n', '')
-  vim.fn.chdir(original_dir)
-  if vim.v.shell_error == 0 then
-    -- print('Found git root for file: ' .. git_root)
-    return git_root
+  -- vim.fn.chdir(buf_path) -- this may not be a valid filesystem path (eg fugitive Gedit)
+  if vim.fn.isdirectory(buf_path) == 1 then
+    local success, err = pcall(function()
+      vim.fn.chdir(buf_path)
+    end)
+    if not success then
+      print("Failed to change directory: " .. err)
+      return nil
+    end
+    local git_root = vim.fn.system('git rev-parse --show-toplevel'):gsub('\n', '')
+    vim.fn.chdir(original_dir)
+    if vim.v.shell_error == 0 then
+      -- print('Found git root for file: ' .. git_root)
+      return git_root
+    else
+      return nil
+    end
   else
+    print("Invalid directory: " .. buf_path)
     return nil
   end
 end
@@ -106,6 +118,22 @@ function MakeYamlfmtOptions(bufnr)
     options = options .. '-conf ' .. config .. ' '
   end
   return options
+end
+
+function GitRepoHasPrettierrc(bufnr)
+  local git_root = FindGitRootDir(bufnr)
+  if not git_root then
+    print("No git root")
+    return false
+  end
+  local prettier_config_path = git_root .. "/.prettierrc"
+  if uv.fs_stat(prettier_config_path) then
+    print("Found .prettierrc")
+    return true
+  else
+    print("No .prettierrc")
+    return false
+  end
 end
 
 -- under development

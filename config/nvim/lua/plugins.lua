@@ -17,13 +17,13 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
   -- use 'itchyny/lightline.vim'
-  use ({
-      'glepnir/galaxyline.nvim',
-      branch = 'main',
-      config = function() 
-        require('themes/eviline') 
-      end,
-  })
+  -- use ({
+  --     'glepnir/galaxyline.nvim',
+  --     branch = 'main',
+  --     -- config = function() 
+  --     --   require('themes/eviline') 
+  --     -- end,
+  -- })
   -- check back once  https://github.com/preservim/nerdtree/issues/1321 is resolved
   use 'preservim/nerdtree'
   use ({
@@ -31,6 +31,7 @@ return require('packer').startup(function()
     config = function() require('autosave').setup{} end,
   })
   use 'Konfekt/FastFold'
+  use 'NoahTheDuke/vim-just'
   use 'andymass/vim-matchup'
   use 'bkegley/gloombuddy'
   use 'cappyzawa/starlark.vim'
@@ -67,6 +68,10 @@ return require('packer').startup(function()
     config = function()
       require('goto-preview').setup {}
     end
+  }
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.6',
