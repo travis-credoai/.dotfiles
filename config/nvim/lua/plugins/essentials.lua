@@ -1,5 +1,4 @@
 return {
-  "preservim/nerdtree",
   "Konfekt/FastFold",
   "NoahTheDuke/vim-just",
   "andymass/vim-matchup",
@@ -13,14 +12,15 @@ return {
   "neovim/nvim-lspconfig",
   "nickeb96/fish.vim",
   "nvim-lua/plenary.nvim",
+  "preservim/nerdtree",
   "ray-x/go.nvim",
-  "terryma/vim-expand-region",
   "sharkdp/fd",
+  "terryma/vim-expand-region",
   "tmhedberg/SimpylFold",
   "towolf/vim-helm",
-  "tpope/vim-rhubarb",
   "tpope/vim-commentary",
   "tpope/vim-fugitive",
   "tpope/vim-obsession",
+  "tpope/vim-rhubarb",
   "tpope/vim-surround",
 }
