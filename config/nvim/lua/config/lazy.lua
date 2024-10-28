@@ -24,4 +24,13 @@ require("lazy").setup({
   -- install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = false },
+  dev = {
+    path = function(plugin)
+      if vim.env.LAZYVIM_PLUGIN_DEV_PATH then
+        return vim.env.LAZYVIM_PLUGIN_DEV_PATH .. '/' .. plugin.name
+      else
+        return "~/projects"
+      end
+    end
+  },
 })
