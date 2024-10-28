@@ -1,12 +1,11 @@
 -- mine
-require('completion')
-require('ft') -- one time filetype settings, not per buffer
-require('keymaps')
-require('lsp')
-require('options')
-require('plugins')
-require('treesitter')
-require('util')
-require('ui')
+-- require('config.completion')
+require('config.ft') -- one time filetype settings, not per buffer
+require('config.keymaps')
+require('config.lazy')
+require('config.lsp')
+require('config.options')
+require('config.treesitter')
+require('config.ui')
+require('lib.util')
 -- external
-require('colorbuddy').colorscheme('the-vapors')

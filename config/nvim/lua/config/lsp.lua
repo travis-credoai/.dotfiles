@@ -1,4 +1,4 @@
-local util = require('util')
+local util = require('lib.util')
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
@@ -290,7 +290,7 @@ vim.api.nvim_create_autocmd({"BufWritePre"}, {
 
 -- typescript
 ---------
-lspconfig.tsserver.setup{
+lspconfig.ts_ls.setup{
   capabilities = capabilities,
 }
 
