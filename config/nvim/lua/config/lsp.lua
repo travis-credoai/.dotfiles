@@ -1,21 +1,10 @@
+local lspcap = require('cmp_nvim_lsp').default_capabilities()
+local lspconfig = require('lspconfig')
+local lsputil = require('lspconfig/util')
 local util = require('lib.util')
-
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
-  end,
-})
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-lspconfig = require('lspconfig')
-lsputil = require('lspconfig/util')
 
 -- general
 -- -------
-local set_omnifunc = function(client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-end
-
 local function lsp_formatting_on_save(client, bufnr)
   -- Enable formatting on save
   if client.server_capabilities.documentFormattingProvider then
@@ -42,6 +31,7 @@ local function lsp_org_imports_on_save(client, bufnr)
     })
   end
 end
+
 -- diagnostic
 -- ---------
 vim.diagnostic.config({
@@ -55,28 +45,29 @@ vim.diagnostic.config({
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
+  callback = function(ev)
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client.supports_method('textDocument') then
-      util.key_mapper('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-      util.key_mapper("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
-      util.key_mapper("n", "gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>")
-      util.key_mapper("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
+      util.key_mapper('n', 'K', vim.lsp.buf.hover, { buffer = ev.buf })
       util.key_mapper("n", "gpD", "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>")
-      util.key_mapper("n", "gpl", "<cmd>lua require('goto-preview').goto_preview_references()<CR>")
+      util.key_mapper("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
+      util.key_mapper("n", "gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>")
+      util.key_mapper("n", "gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>")
       util.key_mapper("n", "gQ", "<cmd>lua require('goto-preview').close_all_win()<CR>")
       util.key_mapper('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
       util.key_mapper('n', '<leader>gds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
       util.key_mapper('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>')
       util.key_mapper('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
       util.key_mapper('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-      util.key_mapper('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format({async=true})<CR>')
+      util.key_mapper('n', '<leader>cf', '<cmd>lua vim.lsp.buf.format({async=true})<CR>')
     end
     if client.supports_method('textDocument/rename') then
       util.key_mapper('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
     end
     if client.supports_method('textDocument/implementation') then
       util.key_mapper('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+      util.key_mapper("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
     end
   end,
 })
@@ -84,7 +75,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- terraform
 ------------
 lspconfig.terraformls.setup{
-  capabilities = capabilities,
+  capabilities = lspcap,
   filetypes = {"terraform", "terraform-vars"}
 }
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
@@ -125,15 +116,14 @@ end
 
 -- disable completion in pylsp but retain formatting
 -- https://github.com/sublimelsp/LSP-pylsp/blob/master/README.md#running-alongside-lsp-pyright
-local pylsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-pylsp_capabilities.completionProvider = false
-pylsp_capabilities.definitionProvider = false
-pylsp_capabilities.documentHighlightProvider = false
-pylsp_capabilities.documentSymbolProvider = false
-pylsp_capabilities.hoverProvider = false
-pylsp_capabilities.referencesProvider = false
-pylsp_capabilities.renameProvider = false
-pylsp_capabilities.signatureHelpProvider = false
+lspcap.completionProvider = false
+lspcap.definitionProvider = false
+lspcap.documentHighlightProvider = false
+lspcap.documentSymbolProvider = false
+lspcap.hoverProvider = false
+lspcap.referencesProvider = false
+lspcap.renameProvider = false
+lspcap.signatureHelpProvider = false
 
 local function on_attach_pylsp(client, bufnr)
     lsp_formatting_on_save(client, bufnr)
@@ -141,7 +131,7 @@ end
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
 -- https://github.com/python-lsp/python-lsp-server
 lspconfig.pylsp.setup{
-  capabilities = pylsp_capabilities,
+  capabilities = lspcap,
   on_init = function(client) 
     client.config.settings.pylsp.plugins.jedi.environment = get_python_path(client.config.root_dir)
   end,
@@ -232,7 +222,7 @@ lspconfig.pyright.setup{
   -- on_init = function(client) 
   --   client.config.settings.python.pythonPath = get_python_path(client.config.root_dir)
   -- end,
-  capabilities = capabilities,
+  capabilities = lspcap,
   settings = { }
 }
 
@@ -240,7 +230,7 @@ lspconfig.pyright.setup{
 -------
 
 lspconfig.yamlls.setup{
-  capabilities = capabilities,
+  capabilities = lspcap,
   settings = {
     yaml = {
       schemas = {
@@ -252,21 +242,13 @@ lspconfig.yamlls.setup{
   }
 }
 
--- don't run yamlls on helm template yamls
-vim.api.nvim_create_autocmd({"BufRead"}, {
-  pattern = {"**/templates/*.yaml"},
-  callback = function() 
-    vim.diagnostic.disable(0)
-  end,
-})
-
 -- golang
 ---------
 
 require('go').setup()
 -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md
 lspconfig.gopls.setup{
-  capabilities = capabilities,
+  capabilities = lspcap,
   cmd = {"gopls", "serve"},
   filetypes = {"go", "gomod"},
   root_dir = lsputil.root_pattern("go.work", "go.mod", ".git"),
@@ -291,14 +273,14 @@ vim.api.nvim_create_autocmd({"BufWritePre"}, {
 -- typescript
 ---------
 lspconfig.ts_ls.setup{
-  capabilities = capabilities,
+  capabilities = lspcap,
 }
 
 
 -- elixir
 ---------
 lspconfig.elixirls.setup{
-  capabilities = capabilities,
+  capabilities = lspcap,
   cmd = { os.getenv("ELIXIR_LS_PATH") .. "/elixir-ls" or "/usr/bin" .. "/elixir-ls" },
   settings = {
   }
@@ -314,3 +296,16 @@ vim.api.nvim_create_autocmd({"BufRead","BufNewFile"}, {
   end,
 })
 lspconfig.tilt_ls.setup{}
+
+-- helm
+-------
+lspconfig.helm_ls.setup {
+  settings = {
+    ['helm-ls'] = {
+      yamlls = {
+        path = "yaml-language-server",
+        -- path = "/opt/homebrew/bin/yaml-language-server",
+      }
+    }
+  }
+}
