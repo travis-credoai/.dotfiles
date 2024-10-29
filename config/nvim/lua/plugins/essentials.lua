@@ -17,7 +17,6 @@ return {
   "sharkdp/fd",
   "terryma/vim-expand-region",
   "tmhedberg/SimpylFold",
-  "towolf/vim-helm",
   "tpope/vim-commentary",
   "tpope/vim-fugitive",
   "tpope/vim-obsession",
