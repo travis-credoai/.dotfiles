@@ -1,11 +1,13 @@
 local M = {}
 
-M.key_mapper = function(mode, key, result)
-  vim.api.nvim_set_keymap(
+M.key_mapper = function(mode, key, result, opts)
+  local default_opts = { noremap = true, silent = true }
+  local final_opts = vim.tbl_extend("force", default_opts, opts or {})
+  vim.keymap.set(
     mode,
     key,
     result,
-    {noremap = true, silent = true}
+    final_opts
   )
 end
 
