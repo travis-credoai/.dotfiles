@@ -169,10 +169,7 @@ local function close_buffers_with_deleted_files()
   end
 end
 
--- Command to trigger the function
 vim.api.nvim_create_user_command('CloseDeletedBuffers', close_buffers_with_deleted_files, {})
--- -----------------
--- under development
 
 M.saveTempSession = function()
   -- local session_name = GenerateUniqueSessionName()
