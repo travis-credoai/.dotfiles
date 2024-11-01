@@ -42,11 +42,6 @@ vim.g.NERDTreeDirArrowExpandable=''
 vim.g.NERDTreeDirArrowCollapsible=''
 vim.g.NERDTreeQuitOnOpen=1
 
--- UltiSnips
-vim.g.UltiSnipsExpandTrigger = '<C-J>'
-vim.g.UltiSnipsJumpForwardTrigger = '<c-j>'
-vim.g.UltiSnipsJumpBackwardTrigger = '<c-k>'
-
 -- CtrlP
 vim.g.ctrlp_cmd = 'CtrlPBuffer'
 util.key_mapper('n', '<c-f>', ':CtrlP<CR>')
