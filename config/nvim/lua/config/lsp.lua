@@ -16,8 +16,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     local opts = { buffer = ev.buf }
     if client.supports_method('textDocument') then
-      -- util.key_mapper('n', 'K', vim.lsp.buf.hover, opts)
-      util.key_mapper('n', '<C-k>', vim.lsp.buf.signature_help, opts)
       util.key_mapper("n", "gpD", "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", opts)
       util.key_mapper("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", opts)
       util.key_mapper("n", "gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", opts)
