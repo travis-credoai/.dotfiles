@@ -199,18 +199,13 @@ M.getLineIndent = function()
 
   while prev_line_num > 0 do
     local prev_line = vim.fn.getline(prev_line_num)
-    print('Scanning back to find non empty line')
     if prev_line:match("%S") then  -- Check if the line has non-whitespace content
       -- Check if the previous non-empty line ends with an opening brace `{`
       if prev_line:match("{%s*$") then
-        print('previous line has opener')
         return vim.fn.indent(prev_line_num) + vim.bo.shiftwidth
       else
-        print('previous line is normal')
         return vim.fn.indent(prev_line_num)
       end
-    else
-      print('previous line is empty skipping')
     end
     prev_line_num = prev_line_num - 1
   end
