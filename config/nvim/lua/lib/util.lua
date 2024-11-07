@@ -184,4 +184,38 @@ M.restoreTempSession = function()
   vim.cmd('source ' .. vim.g.last_session)
 end
 
+M.getLineIndent = function()
+  local line = vim.fn.getline(vim.v.lnum)
+  local prev_line_num = vim.v.lnum - 1
+
+  -- Check if the current line is a closing brace `}`
+  if line:match("^%s*}") then
+    local pos = vim.fn.searchpairpos('{', '', '}', 'bnW')
+    if pos[1] > 0 then
+      local open_brace_indent = vim.fn.indent(pos[1])
+      return open_brace_indent
+    end
+  end
+
+  while prev_line_num > 0 do
+    local prev_line = vim.fn.getline(prev_line_num)
+    print('Scanning back to find non empty line')
+    if prev_line:match("%S") then  -- Check if the line has non-whitespace content
+      -- Check if the previous non-empty line ends with an opening brace `{`
+      if prev_line:match("{%s*$") then
+        print('previous line has opener')
+        return vim.fn.indent(prev_line_num) + vim.bo.shiftwidth
+      else
+        print('previous line is normal')
+        return vim.fn.indent(prev_line_num)
+      end
+    else
+      print('previous line is empty skipping')
+    end
+    prev_line_num = prev_line_num - 1
+  end
+
+  return 0
+end
+
 return M
