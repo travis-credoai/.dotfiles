@@ -1,4 +1,5 @@
 vim.opt_local.commentstring = "// %s"
+vim.opt_local.expandtab = true
 
 -- fixers
 vim.b.ale_fixers = {

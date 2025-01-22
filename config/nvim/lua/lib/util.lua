@@ -1,11 +1,13 @@
 local M = {}
 
-M.key_mapper = function(mode, key, result)
-  vim.api.nvim_set_keymap(
+M.key_mapper = function(mode, key, result, opts)
+  local default_opts = { noremap = true, silent = true }
+  local final_opts = vim.tbl_extend("force", default_opts, opts or {})
+  vim.keymap.set(
     mode,
     key,
     result,
-    {noremap = true, silent = true}
+    final_opts
   )
 end
 
@@ -167,10 +169,7 @@ local function close_buffers_with_deleted_files()
   end
 end
 
--- Command to trigger the function
 vim.api.nvim_create_user_command('CloseDeletedBuffers', close_buffers_with_deleted_files, {})
--- -----------------
--- under development
 
 M.saveTempSession = function()
   -- local session_name = GenerateUniqueSessionName()
@@ -183,6 +182,69 @@ end
 M.restoreTempSession = function()
   -- print('restored temp session: ' .. vim.g.last_session)
   vim.cmd('source ' .. vim.g.last_session)
+end
+
+M.disableDiagnosticNamespacesByPattern = function(pattern, bufnr)
+  -- Get a list of all registered namespaces
+  local namespaces = vim.diagnostic.get_namespaces()
+  if next(namespaces) == nil then
+    print('dang, it is empty')
+  else
+    print('ok, it has stuff')
+  end
+  -- Iterate over each namespace to find a match
+  for id, ns in pairs(namespaces) do
+    print('Evaluating diagnostic ns ' .. ns.name)
+    if ns.name:find(pattern) then
+      print('Disabling ns ' .. ns.name)
+      vim.diagnostic.enable(false, {ns_id = id, bufnr = bufnr})
+    end
+  end
+end
+
+M.getLineIndent = function()
+  local line = vim.fn.getline(vim.v.lnum)
+  local prev_line_num = vim.v.lnum - 1
+
+  -- Check if the current line is a closing brace `}`
+  if line:match("^%s*}") then
+    local pos = vim.fn.searchpairpos('{', '', '}', 'bnW')
+    if pos[1] > 0 then
+      local open_brace_indent = vim.fn.indent(pos[1])
+      return open_brace_indent
+    end
+  end
+
+  while prev_line_num > 0 do
+    local prev_line = vim.fn.getline(prev_line_num)
+    if prev_line:match("%S") then  -- Check if the line has non-whitespace content
+      -- Check if the previous non-empty line ends with an opening brace `{`
+      if prev_line:match("{%s*$") then
+        return vim.fn.indent(prev_line_num) + vim.bo.shiftwidth
+      else
+        return vim.fn.indent(prev_line_num)
+      end
+    end
+    prev_line_num = prev_line_num - 1
+  end
+
+  return 0
+end
+
+M.gotoFilePushTagstack = function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local file = vim.api.nvim_buf_get_name(bufnr)
+  local name = file:match("([^/]+)$")
+  local pos = vim.api.nvim_win_get_position(0)
+  if vim.fn.filereadable(file) == 1 then
+    print('Going to file ' .. file)
+    local pos = { bufnr, pos[1], pos[2], 0 }
+    local items = { { tagname = name, bufnr = bufnr, from = pos } }
+    vim.fn.settagstack(0, { items = items }, 'a')
+    vim.cmd('normal! gf')
+  else
+    vim.cmd('normal! gf')
+  end
 end
 
 return M
