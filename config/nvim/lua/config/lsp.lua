@@ -87,105 +87,105 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- [deprecated]
 -- -- https://github.com/neovim/nvim-lspconfig/issues/500
 -- local function get_python_path(workspace)
---   -- Use activated virtualenv.
---   if vim.env.VIRTUAL_ENV then
---     return lsputil.path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
---   end
+  --   -- Use activated virtualenv.
+  --   if vim.env.VIRTUAL_ENV then
+  --     return lsputil.path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
+  --   end
 
---   -- Find and use virtualenv in workspace directory.
---   for _, pattern in ipairs({'*', '.*'}) do
---     local match = vim.fn.glob(lsputil.path.join(workspace, pattern, 'pyvenv.cfg'))
---     if match ~= '' then
---       return lsputil.path.join(lsputil.path.dirname(match), 'bin', 'python')
---     end
---   end
+  --   -- Find and use virtualenv in workspace directory.
+  --   for _, pattern in ipairs({'*', '.*'}) do
+  --     local match = vim.fn.glob(lsputil.path.join(workspace, pattern, 'pyvenv.cfg'))
+  --     if match ~= '' then
+  --       return lsputil.path.join(lsputil.path.dirname(match), 'bin', 'python')
+  --     end
+  --   end
 
---   -- Find and use virtualenv via poetry in workspace directory.
---   local match = vim.fn.glob(lsputil.path.join(workspace, 'poetry.lock'))
---   if match ~= '' then
---     local venv = vim.fn.trim(vim.fn.system('poetry env info -p'))
---     return lsputil.path.join(venv, 'bin', 'python')
---   end
+  --   -- Find and use virtualenv via poetry in workspace directory.
+  --   local match = vim.fn.glob(lsputil.path.join(workspace, 'poetry.lock'))
+  --   if match ~= '' then
+  --     local venv = vim.fn.trim(vim.fn.system('poetry env info -p'))
+  --     return lsputil.path.join(venv, 'bin', 'python')
+  --   end
 
---   -- Fallback to system Python.
---   return exepath('python3') or exepath('python') or 'python'
--- end
+  --   -- Fallback to system Python.
+  --   return exepath('python3') or exepath('python') or 'python'
+  -- end
 
--- pylsp
----------
+  -- pylsp
+  ---------
 
--- disable completion in pylsp but retain formatting
--- https://github.com/sublimelsp/LSP-pylsp/blob/master/README.md#running-alongside-lsp-pyright
-local lspcap_pylsp = require('cmp_nvim_lsp').default_capabilities()
-lspcap_pylsp.completionProvider = false
-lspcap_pylsp.definitionProvider = false
-lspcap_pylsp.documentHighlightProvider = false
-lspcap_pylsp.documentSymbolProvider = false
-lspcap_pylsp.hoverProvider = false
-lspcap_pylsp.referencesProvider = false
-lspcap_pylsp.renameProvider = false
-lspcap_pylsp.signatureHelpProvider = false
+  -- disable completion in pylsp but retain formatting
+  -- https://github.com/sublimelsp/LSP-pylsp/blob/master/README.md#running-alongside-lsp-pyright
+  local lspcap_pylsp = require('cmp_nvim_lsp').default_capabilities()
+  lspcap_pylsp.completionProvider = false
+  lspcap_pylsp.definitionProvider = false
+  lspcap_pylsp.documentHighlightProvider = false
+  lspcap_pylsp.documentSymbolProvider = false
+  lspcap_pylsp.hoverProvider = false
+  lspcap_pylsp.referencesProvider = false
+  lspcap_pylsp.renameProvider = false
+  lspcap_pylsp.signatureHelpProvider = false
 
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
--- https://github.com/python-lsp/python-lsp-server
-lspconfig.pylsp.setup{
-  capabilities = lspcap_pylsp,
-  root_dir = function(filename, bufnr)
-    vim.fs.root(bufnr, {'pyproject.toml', '.git'})
-  end,
-  settings = {
-    pylsp = {
-      cmd = {"pylsp", "-vvv"},
-      plugins = {
-        autopep8 = {
-          enabled = false
-        },
-        flake8 = {
-          enabled = false
-        },
-        jedi_completion = {
-          enabled = false
-        },
-        jedi_definition = {
-          enabled = false
-        },
-        jedi_hover = {
-          enabled = false
-        },
-        jedi_references = {
-          enabled = false
-        },
-        jedi_signature_help = {
-          enabled = false
-        },
-        jedi_symbols = {
-          enabled = false
-        },
-        pycodestyle = {
-          enabled = true,
-          ignore = {'W391'},
-          maxLineLength = 100
-        },
-        pydocstyle = {
-          enabled = false,
-        },
-        pyflakes = {
-          enabled = false,
-        },
-        pylint = {
-          enabled = false,
-        },
-        pylsp_black = {
-          enabled = false,
-        },
-        pylsp_black = {
-          enabled = false,
-        },
-        pylsp_mypy = {
-          enabled = false,
-        },
-        -- https://github.com/python-lsp/python-lsp-ruff?tab=readme-ov-file#configuration
-        ruff = {
+  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
+  -- https://github.com/python-lsp/python-lsp-server
+  lspconfig.pylsp.setup{
+    capabilities = lspcap_pylsp,
+    root_dir = function(filename, bufnr)
+      vim.fs.root(bufnr, {'pyproject.toml', '.git'})
+    end,
+    settings = {
+      pylsp = {
+        cmd = {"pylsp", "-vvv"},
+        plugins = {
+          autopep8 = {
+            enabled = false
+          },
+          flake8 = {
+            enabled = false
+          },
+          jedi_completion = {
+            enabled = false
+          },
+          jedi_definition = {
+            enabled = false
+          },
+          jedi_hover = {
+            enabled = false
+          },
+          jedi_references = {
+            enabled = false
+          },
+          jedi_signature_help = {
+            enabled = false
+          },
+          jedi_symbols = {
+            enabled = false
+          },
+          pycodestyle = {
+            enabled = true,
+            ignore = {'W391'},
+            maxLineLength = 100
+          },
+          pydocstyle = {
+            enabled = false,
+          },
+          pyflakes = {
+            enabled = false,
+          },
+          pylint = {
+            enabled = false,
+          },
+          pylsp_black = {
+            enabled = false,
+          },
+          pylsp_black = {
+            enabled = false,
+          },
+          pylsp_mypy = {
+            enabled = false,
+          },
+          -- https://github.com/python-lsp/python-lsp-ruff?tab=readme-ov-file#configuration
+          ruff = {
           enabled = true,
           formatEnabled = true,
         },
@@ -213,6 +213,13 @@ lspconfig.pyright.setup{
 
 lspconfig.yamlls.setup{
   capabilities = lspcap,
+  on_attach = function(client, bufnr)
+    local filepath = vim.api.nvim_buf_get_name(bufnr)
+    print('processing ' .. filepath)
+    if string.match(filepath, ".*templates.*") then
+      util.disableDiagnosticNamespacesByPattern('yamlls', bufnr)
+    end
+  end,
   settings = {
     yaml = {
       schemas = {
