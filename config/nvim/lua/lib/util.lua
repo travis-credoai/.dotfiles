@@ -231,4 +231,20 @@ M.getLineIndent = function()
   return 0
 end
 
+M.gotoFilePushTagstack = function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local file = vim.api.nvim_buf_get_name(bufnr)
+  local name = file:match("([^/]+)$")
+  local pos = vim.api.nvim_win_get_position(0)
+  if vim.fn.filereadable(file) == 1 then
+    print('Going to file ' .. file)
+    local pos = { bufnr, pos[1], pos[2], 0 }
+    local items = { { tagname = name, bufnr = bufnr, from = pos } }
+    vim.fn.settagstack(0, { items = items }, 'a')
+    vim.cmd('normal! gf')
+  else
+    vim.cmd('normal! gf')
+  end
+end
+
 return M
