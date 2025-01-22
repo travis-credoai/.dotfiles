@@ -1,22 +1,25 @@
+local util = require('lib/util')
+
 vim.api.nvim_create_autocmd({"FileType"}, {
-  pattern = {"yaml"},
+  pattern = "yaml",
   callback = function(event) 
-    if string.match(event.file, ".*gotk-.*") then
-      -- print("SPECIAL FILE -- ignoring")
-      vim.diagnostic.disable(0)
-      vim.b.ale_fix_on_save = 0
+    local filepath = vim.api.nvim_buf_get_name(event.buf)
+
+    if string.match(filepath, ".*gotk-.*") then
+      print("ft::yaml special fluxcd content")
+      vim.diagnostic.enable(false)
       vim.b.ale_linters = {}
-    elseif string.match(event.file, ".*templates.*") then
-      -- print("Yaml autocommand called for file: " .. event.file)
-      new_fixers = vim.deepcopy(vim.api.nvim_buf_get_var(0, "ale_fixers"))
+      vim.b.ale_fix_on_save = 0
+    elseif string.match(filepath, ".*templates.*") then
+      print("ft::yaml special helm content")
+      new_fixers = vim.deepcopy(vim.api.nvim_buf_get_var(event.buf, "ale_fixers"))
       idx = indexOf(new_fixers, "yamlfmt")
       if idx then
         table.remove(new_fixers, idx)
       end
-      vim.diagnostic.disable(0)
       vim.b.ale_fixers = new_fixers
+      vim.b.ale_fix_on_save = 1
     else
-      -- print("Normal yaml file")
       vim.b.ale_fix_on_save = 1
     end
 

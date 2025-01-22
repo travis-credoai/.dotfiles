@@ -1,3 +1,4 @@
+require('ft/alloy')
 require('ft/json')
 require('ft/markdown')
 require('ft/sh')
