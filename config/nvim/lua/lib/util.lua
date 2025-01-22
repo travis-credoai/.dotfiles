@@ -184,6 +184,24 @@ M.restoreTempSession = function()
   vim.cmd('source ' .. vim.g.last_session)
 end
 
+M.disableDiagnosticNamespacesByPattern = function(pattern, bufnr)
+  -- Get a list of all registered namespaces
+  local namespaces = vim.diagnostic.get_namespaces()
+  if next(namespaces) == nil then
+    print('dang, it is empty')
+  else
+    print('ok, it has stuff')
+  end
+  -- Iterate over each namespace to find a match
+  for id, ns in pairs(namespaces) do
+    print('Evaluating diagnostic ns ' .. ns.name)
+    if ns.name:find(pattern) then
+      print('Disabling ns ' .. ns.name)
+      vim.diagnostic.enable(false, {ns_id = id, bufnr = bufnr})
+    end
+  end
+end
+
 M.getLineIndent = function()
   local line = vim.fn.getline(vim.v.lnum)
   local prev_line_num = vim.v.lnum - 1
