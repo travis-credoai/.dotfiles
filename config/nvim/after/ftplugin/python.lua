@@ -14,6 +14,9 @@ vim.b.ale_python_flake8_auto_pipenv = 1
 vim.b.ale_python_flake8_auto_poetry = 1
 vim.b.ale_python_mypy_auto_poetry = 1
 vim.b.ale_python_mypy_executable = "poetry"
+vim.g.SimpylFold_docstring_preview = 1
+vim.g.SimpylFold_fold_import = 0
+
 
 -- linters
 vim.b.ale_linters = {}
