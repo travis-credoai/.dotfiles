@@ -17,6 +17,7 @@ return {
     util.key_mapper('n', '<leader>fh', builtin.help_tags, {})
     util.key_mapper('n', '<leader>fj', builtin.jumplist, {})
     util.key_mapper('n', '<leader>fr', builtin.registers, {})
-    util.key_mapper('n', '<leader>ft', builtin.tags, {})
+    util.key_mapper('n', '<leader>ft', builtin.treesitter, {})
+    util.key_mapper('n', '<leader>fT', builtin.tags, {})
   end
 }
