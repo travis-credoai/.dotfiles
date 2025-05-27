@@ -14,8 +14,11 @@ util.key_mapper('n', '<c-h>', '<c-w><c-h>')
 util.key_mapper('n', '<c-j>', '<c-w><c-j>')
 util.key_mapper('n', '<c-k>', '<c-w><c-k>')
 util.key_mapper('n', '<c-l>', '<c-w><c-l>')
+util.key_mapper('n', '<c-y>', ':tag<CR>') -- pairs with <c-t>
 util.key_mapper('n', '<leader><space>', ':set nohlsearch<CR>')
 util.key_mapper('n', '<leader>co', ':copen<CR>')
+util.key_mapper('n', '<leader>cn', ':cnext<CR>')
+util.key_mapper('n', '<leader>cp', ':cprev<CR>')
 util.key_mapper('n', '<leader>cq', ':cclose<CR>')
 util.key_mapper('n', '<leader>d[', vim.diagnostic.goto_prev)
 util.key_mapper('n', '<leader>d]', vim.diagnostic.goto_next)
@@ -47,9 +50,10 @@ vim.g.NERDTreeDirArrowExpandable=''
 vim.g.NERDTreeDirArrowCollapsible=''
 vim.g.NERDTreeQuitOnOpen=1
 
--- CtrlP
-vim.g.ctrlp_cmd = 'CtrlPBuffer'
-util.key_mapper('n', '<c-f>', ':CtrlP<CR>')
+-- -- CtrlP
+-- vim.g.ctrlp_cmd = 'CtrlPBuffer'
+-- util.key_mapper('n', '<c-f>', ':CtrlP<CR>')
 
 -- Fugitive
+util.key_mapper('n', '<leader>Gp', ':Git pull<CR>')
 util.key_mapper('n', '<leader>Gprb', ':Git pull --rebase<CR>')
