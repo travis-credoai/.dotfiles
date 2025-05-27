@@ -6,7 +6,6 @@ vim.g.is_posix=1
 vim.b.ale_fixers = {
   "remove_trailing_lines",
   "trim_whitespace",
-  "mix_format"
 }
 
 vim.b.ale_fix_on_save = 1

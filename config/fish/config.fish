@@ -60,6 +60,8 @@ set -g fish_pager_color_selected_background --background=$selection
 starship init fish | source
 enable_transience
 
+mise activate fish | source
+
 if test -f ~/.config/fish/env.fish
     source ~/.config/fish/env.fish
 end
