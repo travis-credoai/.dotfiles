@@ -16,7 +16,7 @@ return {
   "ray-x/go.nvim",
   "sharkdp/fd",
   "terryma/vim-expand-region",
-  "tmhedberg/SimpylFold",
+  -- "tmhedberg/SimpylFold",
   "towolf/vim-helm",
   "tpope/vim-commentary",
   "tpope/vim-fugitive",
