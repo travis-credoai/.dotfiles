@@ -19,5 +19,11 @@ return {
     util.key_mapper('n', '<leader>fr', builtin.registers, {})
     util.key_mapper('n', '<leader>ft', builtin.treesitter, {})
     util.key_mapper('n', '<leader>fT', builtin.tags, {})
+    util.key_mapper('n', '<leader>fld', builtin.lsp_definitions, {})
+    util.key_mapper('n', '<leader>fldt', builtin.lsp_type_definitions, {})
+    util.key_mapper('n', '<leader>flds', builtin.lsp_document_symbols, {})
+    util.key_mapper('n', '<leader>flr', builtin.lsp_references, {})
+    util.key_mapper('n', '<leader>fli', builtin.lsp_incoming_calls, {})
+    util.key_mapper('n', '<leader>flo', builtin.lsp_outgoing_calls, {})
   end
 }
