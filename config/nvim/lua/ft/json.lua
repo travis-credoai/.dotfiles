@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd({"FileType"}, {
       if idx then
         table.remove(new_fixers, idx)
       end
-      vim.diagnostic.disable(0)
+      vim.diagnostic.enable(false, {bufnr = event.buf})
       vim.b.ale_fixers = new_fixers
     else
       -- print("Normal json file")

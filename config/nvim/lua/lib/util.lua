@@ -62,6 +62,9 @@ vim.api.nvim_create_autocmd({"User"}, {
 })
 
 function indexOf(tbl, value)
+    if tbl == nil then
+        return nil
+    end
     for index, val in ipairs(tbl) do
         if val == value then
             return index

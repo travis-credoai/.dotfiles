@@ -7,7 +7,8 @@ vim.api.nvim_create_autocmd({"BufRead"}, {
       table.remove(new_linters, idx)
     end
     -- print("sh autocommand called for file: " .. event.file)
-    vim.diagnostic.disable(event.buf)
+    -- vim.diagnostic.disable(event.buf)
+    vim.diagnostic.enable(false, {bufnr = bufnr})
     vim.b.ale_linters = new_linters
   end,
 })
