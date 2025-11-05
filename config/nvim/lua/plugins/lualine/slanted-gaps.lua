@@ -60,6 +60,14 @@ local function search_result()
   return last_search .. '(' .. searchcount.current .. '/' .. searchcount.total .. ')'
 end
 
+local function file_git_commit()
+    local file = vim.fn.expand('%')
+    local escaped_file = vim.fn.shellescape(file)
+    local commit = vim.fn.system('git log -1 --format="%h" -- ' .. escaped_file)
+    commit = vim.fn.substitute(commit, '\n$', '', '')
+    return commit
+end
+
 local function modified()
   if vim.bo.modified then
     return '+'
@@ -80,6 +88,7 @@ local M = {
     lualine_b = {
       'branch',
       'diff',
+      file_git_commit,
       {
         'diagnostics',
         source = { 'nvim' },
