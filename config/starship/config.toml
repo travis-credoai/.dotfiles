@@ -1,8 +1,4 @@
 format = """
-$username\
-$hostname\
-$directory\
-$direnv\
 $localip\
 $shlvl\
 $vcsh\
@@ -85,9 +81,14 @@ $status\
 $os\
 $container\
 $shell\
+$username\
+$hostname\
+$directory\
+$line_break\
 $character"""
 
 palette = 'vapors'
+add_newline = true
 
 # Define custom colors
 [palettes.vapors]
@@ -130,9 +131,14 @@ pink = '#bb9af7'
 [aws]
 disabled = false
 symbol = '󰸏'
-format = '[]($style)[$symbol]($style inverted)[($profile)($region)(\[$duration\])]($style)'
+format = '[]($style)[$symbol]($style inverted)[($profile)(╱$region╱)(\[$duration\])]($style)'
 style = 'bold fg:vapor_blue bg:background'
 region_aliases = { us-west-2 = "usw2" }
+
+[cmd_duration]
+disabled = false
+style = 'bold fg:sky_blue bg:background'
+format = '[]($style)[]($style inverted)[($duration)]($style)'
 
 [battery]
 disabled = true
@@ -147,19 +153,20 @@ success_symbol = '[❯](bold fg:hulk_pants)'
 error_symbol = '[❯](bold fg:bubble_pink)'
 
 [directory]
+truncation_length = 5
 truncation_symbol = '…/'
 format = '[ $symbol]($style inverted)[$path]($style)'
 style = 'bold fg:vapor_blue bg:background'
 
-[direnv]
-disabled = false
-symbol = ''
-loaded_msg = ''
-unloaded_msg = ''
-allowed_msg = ''
-denied_msg = '󱎘'
-format = '[]($style)[$symbol]($style inverted)[$allowed|$loaded]($style)'
-style = 'bold fg:vapor_blue bg:background'
+# [direnv]
+# disabled = false
+# symbol = ''
+# loaded_msg = ''
+# unloaded_msg = ''
+# allowed_msg = ''
+# denied_msg = '󱎘'
+# format = '[]($style)[$symbol]($style inverted)[$allowed|$loaded]($style)'
+# style = 'bold fg:vapor_blue bg:background'
 
 [docker_context]
 disabled = true
@@ -173,7 +180,7 @@ symbol = '󰖌 '
 
 [gcloud]
 disabled = true
-format = '[]($style)[$symbol]($style inverted)[$account(@$domain)($region)]($style)'
+format = '[]($style)[$symbol]($style inverted)[$account(@$domain)(╱$region╱)]($style)'
 style = 'bold fg:vapor_blue bg:background'
 symbol = ''
 
@@ -203,7 +210,7 @@ disabled = false
 [kubernetes]
 disabled = false
 symbol = '☸'
-format = '[]($style)[$symbol]($style inverted)[$context( $namespace)]($style)'
+format = '[]($style)[$symbol]($style inverted)[$context( ╱$namespace╱)]($style)'
 style = 'bold fg:vapor_blue bg:background'
 contexts = [
     { context_pattern = '.*prd.*', style = 'fg:red' },
@@ -225,8 +232,13 @@ style = 'bold fg:vapor_blue bg:background'
 disabled = true
 
 [python]
-format = '[]($style)[$symbol]($style inverted)[$pyenv_prefix(${version})( $virtualenv)]($style)'
+format = '[]($style)[$symbol]($style inverted)[$pyenv_prefix(${version})( ╱$virtualenv╱)]($style)'
 symbol = ''
+style = 'bold fg:vapor_blue bg:background'
+
+[golang]
+format = '[]($style)[$symbol]($style inverted)[$version)]($style)'
+symbol = ''
 style = 'bold fg:vapor_blue bg:background'
 
 [rust]

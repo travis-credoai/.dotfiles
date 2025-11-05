@@ -1,6 +1,4 @@
 local lspcap = require('cmp_nvim_lsp').default_capabilities()
-local lspconfig = require('lspconfig')
-local lsputil = require('lspconfig/util')
 local util = require('lib.util')
 
 -- general
@@ -15,18 +13,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc' -- this may be extraneous for neovim >=v0.8.1
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     local opts = { buffer = ev.buf }
-    if client.supports_method('textDocument') then
-      util.key_mapper("n", "gpD", "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", opts)
-      util.key_mapper("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", opts)
-      util.key_mapper("n", "gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", opts)
-      util.key_mapper("n", "gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", opts)
-      util.key_mapper("n", "gQ", "<cmd>lua require('goto-preview').close_all_win()<CR>", opts)
+    if client:supports_method('textDocument') then
       util.key_mapper('n', '<leader>gd', vim.lsp.buf.definition, opts)
       util.key_mapper('n', '<leader>gds', vim.lsp.buf.document_symbol, opts)
       util.key_mapper('n', '<leader>gr', vim.lsp.buf.references, opts)
       util.key_mapper('n', '<leader>gs', vim.lsp.buf.signature_help, opts)
-      util.key_mapper({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+      -- util.key_mapper({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+      util.key_mapper('n', '<leader>ci', function()
+        print('organizing imports')
+        vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+      end, opts)
       util.key_mapper('n', '<leader>cf', function()
+        print('formatting')
         vim.lsp.buf.format({async=true})
       end, opts)
     end
@@ -52,12 +50,28 @@ vim.diagnostic.config({
   },
 })
 
+-- general
+-- -------
+
+-- vim.lsp.config('*', {
+--   root_markers = { '.git' },
+--   capabilities = {
+--     textDocument = {
+--       semanticTokens = {
+--         multilineTokenSupport = true,
+--       }
+--     }
+--   }
+-- })
+
 -- terraform
 ------------
-lspconfig.terraformls.setup{
+vim.lsp.config.terraformls = {
   capabilities = lspcap,
   filetypes = {"terraform", "terraform-vars"}
 }
+vim.lsp.enable('terraformls')
+
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
   pattern = {"*.tf", "*.tfvars"},
   callback = function() 
@@ -76,35 +90,35 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-  group = org_imports_group,
-  pattern = { "*.py" },
-  callback = function()
-    vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
-  end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   group = org_imports_group,
+--   pattern = { "*.py" },
+--   callback = function()
+--     vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+--   end,
+-- })
 
 -- [deprecated]
 -- -- https://github.com/neovim/nvim-lspconfig/issues/500
 -- local function get_python_path(workspace)
 --   -- Use activated virtualenv.
 --   if vim.env.VIRTUAL_ENV then
---     return lsputil.path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
+--     return vim.lsp.config.util.path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
 --   end
 
 --   -- Find and use virtualenv in workspace directory.
 --   for _, pattern in ipairs({'*', '.*'}) do
---     local match = vim.fn.glob(lsputil.path.join(workspace, pattern, 'pyvenv.cfg'))
+--     local match = vim.fn.glob(vim.lsp.config.util.path.join(workspace, pattern, 'pyvenv.cfg'))
 --     if match ~= '' then
---       return lsputil.path.join(lsputil.path.dirname(match), 'bin', 'python')
+--       return vim.lsp.config.util.path.join(vim.lsp.config.util.path.dirname(match), 'bin', 'python')
 --     end
 --   end
 
 --   -- Find and use virtualenv via poetry in workspace directory.
---   local match = vim.fn.glob(lsputil.path.join(workspace, 'poetry.lock'))
+--   local match = vim.fn.glob(vim.lsp.config.util.path.join(workspace, 'poetry.lock'))
 --   if match ~= '' then
 --     local venv = vim.fn.trim(vim.fn.system('poetry env info -p'))
---     return lsputil.path.join(venv, 'bin', 'python')
+--     return vim.lsp.config.util.path.join(venv, 'bin', 'python')
 --   end
 
 --   -- Fallback to system Python.
@@ -128,11 +142,12 @@ lspcap_pylsp.signatureHelpProvider = false
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
 -- https://github.com/python-lsp/python-lsp-server
-lspconfig.pylsp.setup{
+vim.lsp.config.pylsp = {
   capabilities = lspcap_pylsp,
-  root_dir = function(filename, bufnr)
-    vim.fs.root(bufnr, {'pyproject.toml', '.git'})
-  end,
+  root_markers = { 'pyproject.toml', '.git' },
+  -- root_dir = function(filename, bufnr)
+  --   vim.fs.root(bufnr, {'pyproject.toml', '.git'})
+  -- end,
   settings = {
     pylsp = {
       cmd = {"pylsp", "-vvv"},
@@ -198,20 +213,22 @@ lspconfig.pylsp.setup{
     }
   }
 }
+vim.lsp.enable('pylsp')
 
 -- pylsp
 ---------
 
 -- https://packagecontrol.io/packages/LSP-pyright
-lspconfig.pyright.setup{
+vim.lsp.config.pyright = {
   capabilities = lspcap,
   settings = {}
 }
+vim.lsp.enable('pyright')
 
 -- yaml
 -------
 
-lspconfig.yamlls.setup{
+vim.lsp.config.yamlls = {
   capabilities = lspcap,
   on_attach = function(client, bufnr)
     local filepath = vim.api.nvim_buf_get_name(bufnr)
@@ -226,23 +243,22 @@ lspconfig.yamlls.setup{
         ["https://json.schemastore.org/kustomization.json"] = "/kustomization.yaml",
         ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
         ["https://json.schemastore.org/chart.json"] = "/Chart.yaml",
+        ["./schema/crd/helmrelease.helm.toolkit.fluxcd.io_v2.json"] = "/templates/*.yaml",
       }
     }
   }
 }
+vim.lsp.enable('yamlls')
 
 -- golang
 ---------
 
 require('go').setup()
 -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md
-lspconfig.gopls.setup{
+vim.lsp.config.gopls = {
   capabilities = lspcap,
   cmd = {"gopls", "serve"},
   filetypes = {"go", "gomod"},
-  root_dir = function(filename, bufnr)
-    vim.fs.root(bufnr, {'go.work', 'go.mod', '.git'})
-  end,
   settings = {
     gopls = {
       analyses = {
@@ -252,6 +268,7 @@ lspconfig.gopls.setup{
     },
   },
 }
+vim.lsp.enable('gopls')
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = format_group,
@@ -272,7 +289,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 -- typescript
 ---------
-lspconfig.ts_ls.setup{
+vim.lsp.config.ts_ls = {
   capabilities = lspcap,
   root_dir = function(filename, bufnr)
     vim.fs.root(bufnr, {'package.json', '.git'})
@@ -281,6 +298,7 @@ lspconfig.ts_ls.setup{
   --   lsp_formatting_on_save(client, bufnr)
   -- end,
 }
+vim.lsp.enable('ts_ls')
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = format_group,
@@ -292,12 +310,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 -- elixir
 ---------
-lspconfig.elixirls.setup{
+vim.lsp.config.elixirls = {
   capabilities = lspcap,
   cmd = { os.getenv("ELIXIR_LS_PATH") .. "/elixir-ls" or "/usr/bin" .. "/elixir-ls" },
-  settings = {
-  }
 }
+vim.lsp.enable('elixirls')
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = format_group,
@@ -316,11 +333,12 @@ vim.api.nvim_create_autocmd({"BufRead","BufNewFile"}, {
     vim.bo.syntax = "starlark"
   end,
 })
-lspconfig.tilt_ls.setup{}
+vim.lsp.config.tiltls = {}
+vim.lsp.enable('tilt_ls')
 
 -- helm
 -------
-lspconfig.helm_ls.setup {
+vim.lsp.config.helm_ls = {
   settings = {
     ['helm-ls'] = {
       yamlls = {
@@ -330,3 +348,4 @@ lspconfig.helm_ls.setup {
     }
   }
 }
+vim.lsp.enable('helm_ls')
