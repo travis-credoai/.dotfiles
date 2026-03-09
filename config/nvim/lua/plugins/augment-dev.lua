@@ -1,12 +1,15 @@
 return { 
   'haggishunk/augment.vim',
   dir = "~/code/haggishunk/augment.vim", 
-  enabled = true,
+  enabled = false,
   config = function()
     local g = vim.g
     g.augment_workspace_folders = {
       '/Users/travismattera/code/authlib/authlib',
+      '/Users/travismattera/code/credo-ai/aws-infrastructure-live',
+      '/Users/travismattera/code/credo-ai/azure-infrastructure-live',
       '/Users/travismattera/code/credo-ai/credo-backend/apps',
+      '/Users/travismattera/code/credo-ai/credo-ui',
       '/Users/travismattera/code/credo-ai/credoai-gaia',
       '/Users/travismattera/code/credo-ai/credoai-gaia/src',
       '/Users/travismattera/code/credo-ai/credoai-integration-service',
@@ -16,6 +19,8 @@ return {
       '/Users/travismattera/code/credo-ai/k8s-deploy',
       '/Users/travismattera/code/credo-ai/policy-packs',
       '/Users/travismattera/code/credo-ai/python-service-template',
+      '/Users/travismattera/code/credo-ai/terraform-aws-service-catalog',
+      '/Users/travismattera/code/credo-ai/terraform-azure-service-catalog',
       '/Users/travismattera/code/haggishunk/augment.vim',
     }
 
