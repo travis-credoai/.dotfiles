@@ -1,5 +1,6 @@
 return {
   "preservim/nerdtree",
+  enabled = false,
   config = function()
     local util = require('lib.util')
     util.key_mapper('n', '<leader>nf', ':NERDTreeFind<CR>')

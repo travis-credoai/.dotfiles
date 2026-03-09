@@ -1,6 +1,7 @@
 return {
   {
     "Equilibris/nx.nvim",
+    enabled = false,
 
     dependencies = {
       "nvim-telescope/telescope.nvim",
