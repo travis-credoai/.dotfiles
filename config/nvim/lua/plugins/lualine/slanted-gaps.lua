@@ -60,14 +60,6 @@ local function search_result()
   return last_search .. '(' .. searchcount.current .. '/' .. searchcount.total .. ')'
 end
 
-local function file_git_commit()
-    local file = vim.fn.expand('%')
-    local escaped_file = vim.fn.shellescape(file)
-    local commit = vim.fn.system('git log -1 --format="%h" -- ' .. escaped_file)
-    commit = vim.fn.substitute(commit, '\n$', '', '')
-    return commit
-end
-
 local function modified()
   if vim.bo.modified then
     return '+'
@@ -76,6 +68,18 @@ local function modified()
   end
   return ''
 end
+
+local trouble = require('trouble')
+local trouble_sym = trouble.statusline({
+  mode = "lsp_document_symbols",
+  groups = {},
+  title = false,
+  filter = { range = true },
+  format = "{kind_icon}{symbol.name:Normal}",
+  -- The following line is needed to fix the background color
+  -- Set it to the lualine section you want to use
+  hl_group = "lualine_c_normal",
+})
 
 local M = {
   options = {
@@ -88,7 +92,6 @@ local M = {
     lualine_b = {
       'branch',
       'diff',
-      file_git_commit,
       {
         'diagnostics',
         source = { 'nvim' },
@@ -122,7 +125,12 @@ local M = {
         end,
       },
     },
-    lualine_c = {},
+    lualine_c = {
+      {
+        trouble_sym.get,
+        cond = trouble_sym.has,
+      }
+    },
     lualine_x = {},
     lualine_y = { search_result, 'filetype' },
     lualine_z = { '%l:%c', '%p%%/%L' },
