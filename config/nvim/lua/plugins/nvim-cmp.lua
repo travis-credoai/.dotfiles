@@ -1,5 +1,6 @@
 return {
   "hrsh7th/nvim-cmp",
+  enabled = true,
   -- load cmp on InsertEnter
   event = "InsertEnter",
   -- these dependencies will only be loaded when cmp loads
@@ -9,8 +10,26 @@ return {
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-path",
-    "hrsh7th/cmp-vsnip",
-    "hrsh7th/nvim-cmp",
+    -- "hrsh7th/cmp-vsnip",
+    "L3MON4D3/LuaSnip",
+    "saadparwaiz1/cmp_luasnip",
+    {
+      "hrsh7th/nvim-cmp",
+      config = function ()
+        require'cmp'.setup {
+          snippet = {
+            expand = function(args)
+              require'luasnip'.lsp_expand(args.body)
+            end
+          },
+
+          sources = {
+            { name = 'luasnip' },
+            -- more sources
+          },
+        }
+      end
+    },
     "hrsh7th/vim-vsnip",
     "petertriho/cmp-git",
   },
@@ -40,8 +59,8 @@ return {
       }),
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'vsnip' }, -- For vsnip users.
-        -- { name = 'luasnip' }, -- For luasnip users.
+        -- { name = 'vsnip' }, -- For vsnip users.
+        { name = 'luasnip' }, -- For luasnip users.
         -- { name = 'ultisnips' }, -- For ultisnips users.
         -- { name = 'snippy' }, -- For snippy users.
       }, {

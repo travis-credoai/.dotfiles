@@ -213,7 +213,7 @@ symbol = '☸'
 format = '[]($style)[$symbol]($style inverted)[$context( ╱$namespace╱)]($style)'
 style = 'bold fg:vapor_blue bg:background'
 contexts = [
-    { context_pattern = '.*prd.*', style = 'fg:red' },
+    { context_pattern = '.*pr.d.*', style = 'fg:red' },
     { context_pattern = 'kubernetes-admin@kubernetes', style = 'fg:green', context_alias = 'kubeadm' },
 ]
 
@@ -237,7 +237,7 @@ symbol = ''
 style = 'bold fg:vapor_blue bg:background'
 
 [golang]
-format = '[]($style)[$symbol]($style inverted)[$version)]($style)'
+format = '[]($style)[$symbol]($style inverted)[$version]($style)'
 symbol = ''
 style = 'bold fg:vapor_blue bg:background'
 

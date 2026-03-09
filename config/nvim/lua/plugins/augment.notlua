@@ -1,8 +1,14 @@
 return {
   'augmentcode/augment.vim',
+  enabled=false,
   config = function()
     local g = vim.g
-    g.augment_workspace_folders = {'/Users/travismattera/code/credo-ai/credo-backend'}
+    g.augment_workspace_folders = {
+      '/Users/travismattera/code/credo-ai/credo-backend',
+      '/Users/travismattera/code/credo-ai/k8s-deploy',
+      '/Users/travismattera/code/credo-ai/credoai_research',
+      '/Users/travismattera/code/authlib/authlib',
+    }
 
     -- Augment Chat Floating Window
     local function augment_chat_float()

@@ -11,7 +11,7 @@ vim.o.history = 100
 vim.o.hlsearch = true
 vim.o.ignorecase = true
 vim.o.incsearch = true
-vim.o.laststatus = 2
+vim.o.laststatus = 3  -- changed from laststatus = 2 due to https://github.com/yetone/avante.nvim
 vim.o.lazyredraw = true
 vim.o.magic = true
 vim.o.number = true
@@ -26,6 +26,7 @@ vim.o.softtabstop = 2
 vim.o.swapfile = false
 vim.o.tabstop = 2
 vim.o.tags = './.tags,.tags,./tags,tags'
+vim.o.termguicolors = true
 vim.o.textwidth=0
 vim.o.timeoutlen = 2000
 vim.o.ttimeoutlen = 100

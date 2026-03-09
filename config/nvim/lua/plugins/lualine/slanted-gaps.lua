@@ -1,22 +1,23 @@
 local colors = {
-  red = '#ff00d7',
-  grey = '#808080',
+  pink = '#ff5fff',
+  purple = '#8787ff',
   black = '#303030',
-  white = '#e4e4e4',
+  white = '#808080',
   light_green = '#00f77b',
-  orange = '#ff5fff',
-  green = '#00f77b',
+  blue = '#00d7ff',
+  green = '#12e03d',
+  hulk_pants = '#9145ed',
 }
 
 local theme = {
   normal = {
-    a = { fg = colors.white, bg = colors.black },
-    b = { fg = colors.white, bg = colors.grey },
-    c = { fg = colors.black, bg = colors.white },
-    z = { fg = colors.white, bg = colors.black },
+    a = { fg = colors.black, bg = colors.white },
+    b = { fg = colors.black, bg = colors.purple },
+    c = { fg = colors.black, bg = colors.blue },
+    z = { fg = colors.blue, bg = colors.black },
   },
   insert = { a = { fg = colors.black, bg = colors.light_green } },
-  visual = { a = { fg = colors.black, bg = colors.orange } },
+  visual = { a = { fg = colors.black, bg = colors.hulk_pants } },
   replace = { a = { fg = colors.black, bg = colors.green } },
 }
 
@@ -34,7 +35,7 @@ local function process_sections(sections)
   for name, section in pairs(sections) do
     local left = name:sub(9, 10) < 'x'
     for pos = 1, name ~= 'lualine_z' and #section or #section - 1 do
-      table.insert(section, pos * 2, { empty, color = { fg = colors.white, bg = colors.white } })
+      table.insert(section, pos * 2, { empty, color = { fg = colors.blue, bg = colors.blue } })
     end
     for id, comp in ipairs(section) do
       if type(comp) ~= 'table' then
@@ -68,6 +69,18 @@ local function modified()
   return ''
 end
 
+local trouble = require('trouble')
+local trouble_sym = trouble.statusline({
+  mode = "lsp_document_symbols",
+  groups = {},
+  title = false,
+  filter = { range = true },
+  format = "{kind_icon}{symbol.name:Normal}",
+  -- The following line is needed to fix the background color
+  -- Set it to the lualine section you want to use
+  hl_group = "lualine_c_normal",
+})
+
 local M = {
   options = {
     theme = theme,
@@ -83,16 +96,16 @@ local M = {
         'diagnostics',
         source = { 'nvim' },
         sections = { 'error' },
-        diagnostics_color = { error = { bg = colors.red, fg = colors.white } },
+        diagnostics_color = { error = { bg = colors.pink, fg = colors.white } },
       },
       {
         'diagnostics',
         source = { 'nvim' },
         sections = { 'warn' },
-        diagnostics_color = { warn = { bg = colors.orange, fg = colors.white } },
+        diagnostics_color = { warn = { bg = colors.blue, fg = colors.white } },
       },
       { 'filename', file_status = false, path = 1 },
-      { modified, color = { bg = colors.red } },
+      { modified, color = { bg = colors.pink } },
       {
         '%w',
         cond = function()
@@ -112,7 +125,12 @@ local M = {
         end,
       },
     },
-    lualine_c = {},
+    lualine_c = {
+      {
+        trouble_sym.get,
+        cond = trouble_sym.has,
+      }
+    },
     lualine_x = {},
     lualine_y = { search_result, 'filetype' },
     lualine_z = { '%l:%c', '%p%%/%L' },
