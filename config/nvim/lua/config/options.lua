@@ -26,6 +26,7 @@ vim.o.softtabstop = 2
 vim.o.swapfile = false
 vim.o.tabstop = 2
 vim.o.tags = './.tags,.tags,./tags,tags'
+vim.o.termguicolors = true
 vim.o.textwidth=0
 vim.o.timeoutlen = 2000
 vim.o.ttimeoutlen = 100
