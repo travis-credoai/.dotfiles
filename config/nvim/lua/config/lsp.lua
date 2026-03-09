@@ -291,9 +291,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 ---------
 vim.lsp.config.ts_ls = {
   capabilities = lspcap,
-  root_dir = function(filename, bufnr)
-    vim.fs.root(bufnr, {'package.json', '.git'})
-  end,
+  root_markers = { 'package.json', '.git' },
   -- on_attach = function(client, bufnr)
   --   lsp_formatting_on_save(client, bufnr)
   -- end,
