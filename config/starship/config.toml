@@ -237,7 +237,7 @@ symbol = ''
 style = 'bold fg:vapor_blue bg:background'
 
 [golang]
-format = '[]($style)[$symbol]($style inverted)[$version)]($style)'
+format = '[]($style)[$symbol]($style inverted)[$version]($style)'
 symbol = ''
 style = 'bold fg:vapor_blue bg:background'
 
