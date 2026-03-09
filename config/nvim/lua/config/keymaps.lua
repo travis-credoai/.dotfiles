@@ -55,5 +55,31 @@ vim.g.NERDTreeQuitOnOpen=1
 -- util.key_mapper('n', '<c-f>', ':CtrlP<CR>')
 
 -- Fugitive
+util.key_mapper('n', '<leader>Gup', ':Git fetch --all --prune --tags<CR>:Git pull<CR>')
 util.key_mapper('n', '<leader>Gp', ':Git pull<CR>')
 util.key_mapper('n', '<leader>Gprb', ':Git pull --rebase<CR>')
+
+-- Splits [in-work]
+--
+-- vim.keymap.set('c', '!', function()
+--   local cmdline = vim.fn.getcmdline()
+--   local cmdpos = vim.fn.getcmdpos()
+--   echo('oh fuzz')
+  
+--   -- Only intercept if we're at the beginning and it's a : command
+--   if vim.fn.getcmdtype() == ':' and cmdpos == 1 and cmdline == '' then
+--     -- Cancel the command line and prompt for command
+--     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-c>', true, false, true), 'n', false)
+    
+--     vim.ui.input({ prompt = 'Command: ' }, function(input)
+--       if input and input ~= '' then
+--         run_command_in_split(input)
+--       end
+--     end)
+    
+--     return ''
+--   else
+--     return '!'
+--   end
+-- end, { expr = true })
+
