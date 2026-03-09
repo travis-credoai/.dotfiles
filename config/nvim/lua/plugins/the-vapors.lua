@@ -1,6 +1,7 @@
 return {
   "haggishunk/the-vapors.nvim",
   enabled = true,
+  dir = "~/code/haggishunk/the-vapors.nvim", 
   branch = "modify-main-color",
   dev = false,
   priority = 1000,
