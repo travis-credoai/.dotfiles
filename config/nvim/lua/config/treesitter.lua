@@ -3,7 +3,7 @@
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 
-require'nvim-treesitter.configs'.setup {
+require'nvim-treesitter.config'.setup {
   ensure_installed = { "c", "lua", "rust", "yaml", "vim", "python", "dockerfile", "go", "mermaid", "markdown", "terraform", "hcl", "typescript", "toml" },
   auto_install = false,
   highlight = {
