@@ -12,7 +12,7 @@ vim.o.hlsearch = true
 vim.o.ignorecase = true
 vim.o.incsearch = true
 vim.o.laststatus = 3  -- changed from laststatus = 2 due to https://github.com/yetone/avante.nvim
-vim.o.lazyredraw = true
+vim.o.lazyredraw = false
 vim.o.magic = true
 vim.o.number = true
 vim.o.relativenumber = true

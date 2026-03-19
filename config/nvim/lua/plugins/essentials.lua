@@ -13,6 +13,7 @@ return {
   {"nickeb96/fish.vim", enabled = true},
   {"nvim-lua/plenary.nvim", enabled = true},
   {"ray-x/go.nvim", enabled = true},
+  {"rcarriga/nvim-notify", enabled = true},
   {"sharkdp/fd", enabled = true},
   {"terryma/vim-expand-region", enabled = true},
   {"towolf/vim-helm", enabled = true},
