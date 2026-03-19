@@ -238,7 +238,7 @@ style = 'bold fg:vapor_blue bg:background'
 
 [golang]
 format = '[]($style)[$symbol]($style inverted)[$version]($style)'
-symbol = ''
+symbol = ''
 style = 'bold fg:vapor_blue bg:background'
 
 [rust]

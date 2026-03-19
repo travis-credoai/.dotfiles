@@ -1,7 +1,7 @@
 return { 
   'haggishunk/augment.vim',
   dir = "~/code/haggishunk/augment.vim", 
-  enabled = false,
+  enabled = true,
   config = function()
     local g = vim.g
     g.augment_workspace_folders = {
@@ -84,10 +84,10 @@ return {
 
     -- Create command and mapping
     vim.api.nvim_create_user_command('AugmentChatFloat', augment_chat_float, {})
-    vim.keymap.set('n', '<leader>ac', ':Augment chat<CR>')
-    vim.keymap.set('v', '<leader>ac', ":'<,'>Augment chat<CR>", { desc = 'Augment chat with selection' })
-    vim.keymap.set('n', '<leader>af', augment_chat_float)
-    vim.keymap.set('n', '<leader>at', ':Augment chat-toggle<CR>')
+    vim.keymap.set('n', '<leader>auc', ':Augment chat<CR>')
+    vim.keymap.set('v', '<leader>auc', ":'<,'>Augment chat<CR>", { desc = 'Augment chat with selection' })
+    vim.keymap.set('n', '<leader>auf', augment_chat_float)
+    vim.keymap.set('n', '<leader>aut', ':Augment chat-toggle<CR>')
 
   end
 }
