@@ -4,6 +4,9 @@ return {
   opts = {
     -- add any options here
   },
+  keys = {
+    { "<leader>nd", "<cmd>NoiceDismiss<cr>", desc = "Dismiss Noice Message" },
+  },
   config = function()
     require("noice").setup({
       lsp = {
