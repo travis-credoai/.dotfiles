@@ -5,9 +5,12 @@ return {
     -- add any options here
   },
   keys = {
-    { "<leader>nd", "<cmd>NoiceDismiss<cr>", desc = "Dismiss Noice Message" },
+    { "<leader>nD", "<cmd>NoiceDismiss<cr>", desc = "Dismiss Noice Message" },
+    { "<leader>nT", "<cmd>NoiceTelescope<cr>", desc = "Noice Telescope" },
+    { "<leader>nE", "<cmd>NoiceErrors<cr>", desc = "Noice Errors" },
   },
   config = function()
+
     require("noice").setup({
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
