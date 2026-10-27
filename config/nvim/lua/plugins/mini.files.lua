@@ -6,8 +6,8 @@ return {
     require('mini.files').setup{}
 
     local util = require('lib.util')
-    util.key_mapper('n', '<leader>mf', ':lua MiniFiles.open()<CR>')
-    util.key_mapper('n', '<leader>mp', function()
+    util.key_mapper('n', '<leader>mr', ':lua MiniFiles.open()<CR>')
+    util.key_mapper('n', '<leader>mb', function()
       local buf_name = vim.api.nvim_buf_get_name(0)
       local path = buf_name ~= "" and vim.uv.fs_stat(buf_name) and buf_name or nil
       MiniFiles.open(path)
