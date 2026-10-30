@@ -1,5 +1,8 @@
 fish_vi_key_bindings
 
+# unset global shadow variables of universal vars we want to rotate 
+set -qg GITHUB_TOKEN; and set -eg GITHUB_TOKEN
+
 # spacefish
 set -gx SPACEFISH_PROMPT_ORDER time user dir host git package node docker golang rust aws pyenv kubecontext line_sep battery char
 set -gx SPACEFISH_GIT_SYMBOL ' '
